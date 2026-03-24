@@ -6,7 +6,7 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (argc != 2)
 	{
-		printf("Error:\nUse ./cub3d /path/to/file.cub\n");
+		printf("Error:\nUse ./cub3d /path/to/map.cub\n");
 		return (-1);
 	}
 	// Parsing
