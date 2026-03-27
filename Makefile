@@ -3,8 +3,9 @@ NAME			:= cub3d
 
 COMPILER		:= cc
 COMPILER_FLAGS	:= -Wall -Wextra -Werror
-LFLAGS			:= -L./include/mlx -lmlx -lXext -lX11 -lm -lz
-LIBMLX			:= include/mlx/libmlx.a
+MLX_DIR			:= ./include/minilibx-linux
+LIBMLX			:= $(MLX_DIR)/libmlx.a
+MLXFLAGS		:= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 
 SRC_DIR 		:= ./src/
 OBJ_DIR 		:= ./obj/
@@ -19,18 +20,19 @@ OBJS			:= $(addprefix $(OBJ_DIR), $(OBJ))
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(COMPILER) $(COMPILER_FLAGS) -c $< -o $@
 
-all: $(NAME) $(LIBMLX)
+all: $(NAME)
 
-$(NAME): $(OBJ_DIR) $(OBJS)
-	$(COMPILER) $(COMPILER_FLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(OBJ_DIR) $(OBJS) $(LIBMLX)
+	$(COMPILER) $(COMPILER_FLAGS) $(OBJS) $(LIBMLX) $(MLXFLAGS) -o $(NAME)
 
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 
 $(LIBMLX):
-	make -C include/minilibx-linux/
+	make -C $(MLX_DIR)
 
 clean:
+	make clean -C $(MLX_DIR)
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
