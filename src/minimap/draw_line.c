@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_init.c                                      :+:      :+:    :+:   */
+/*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 14:05:46 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/03/31 17:15:41 by tpirinen         ###   ########.fr       */
+/*   Created: 2026/03/31 16:51:44 by tpirinen          #+#    #+#             */
+/*   Updated: 2026/03/31 16:55:22 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	player_init(t_player *player)
+void	draw_line(t_player *player, t_game *game, float start_x)
 {
-	player->x = WIDTH / 2;
-	player->y = HEIGHT / 2;
-	player->angle = 270 * PI / 180;
-	player->fov = PI / 2.0f;
-	player->move_speed = 3;
-	player->turn_speed = 0.03;
-	player->key_up = false;
-	player->key_down = false;
-	player->key_right = false;
-	player->key_left = false;
-	player->left_rotate = false;
-	player->right_rotate = false;
+	float	cos_angle = cos(start_x);
+	float	sin_angle = sin(start_x);
+	float	ray_x = player->x;
+	float	ray_y = player->y;
+	
+	while(!touch(ray_x, ray_y, game))
+	{
+		put_pixel(ray_x, ray_y, 0xFF0000, game);
+		ray_x += cos_angle;
+		ray_y += sin_angle;
+	}
 }

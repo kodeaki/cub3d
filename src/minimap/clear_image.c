@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_init.c                                      :+:      :+:    :+:   */
+/*   clear_image.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 14:05:46 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/03/31 17:15:41 by tpirinen         ###   ########.fr       */
+/*   Created: 2026/03/31 15:27:36 by tpirinen          #+#    #+#             */
+/*   Updated: 2026/03/31 15:34:47 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	player_init(t_player *player)
+void	clear_image(t_game *game)
 {
-	player->x = WIDTH / 2;
-	player->y = HEIGHT / 2;
-	player->angle = 270 * PI / 180;
-	player->fov = PI / 2.0f;
-	player->move_speed = 3;
-	player->turn_speed = 0.03;
-	player->key_up = false;
-	player->key_down = false;
-	player->key_right = false;
-	player->key_left = false;
-	player->left_rotate = false;
-	player->right_rotate = false;
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			put_pixel(x, y, 0, game);
+			x++;
+		}
+		y++;
+	}
 }

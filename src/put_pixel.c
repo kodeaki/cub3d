@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_init.c                                      :+:      :+:    :+:   */
+/*   put_pixel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 14:05:46 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/03/31 17:15:41 by tpirinen         ###   ########.fr       */
+/*   Created: 2026/03/31 14:36:38 by tpirinen          #+#    #+#             */
+/*   Updated: 2026/03/31 14:37:34 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	player_init(t_player *player)
+void	put_pixel(int x, int y, int color, t_game *game)
 {
-	player->x = WIDTH / 2;
-	player->y = HEIGHT / 2;
-	player->angle = 270 * PI / 180;
-	player->fov = PI / 2.0f;
-	player->move_speed = 3;
-	player->turn_speed = 0.03;
-	player->key_up = false;
-	player->key_down = false;
-	player->key_right = false;
-	player->key_left = false;
-	player->left_rotate = false;
-	player->right_rotate = false;
+	int	index;
+
+	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
+		return ;
+	index = y * game->size_line + x * game->bits_per_pixel / 8;
+	game->data[index] = color & 0xFF;
+	game->data[index + 1] = (color >> 8) & 0xFF;
+	game->data[index + 2] = (color >> 16) & 0xFF;
 }

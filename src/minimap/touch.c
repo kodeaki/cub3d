@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_init.c                                      :+:      :+:    :+:   */
+/*   touch.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 14:05:46 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/03/31 17:15:41 by tpirinen         ###   ########.fr       */
+/*   Created: 2026/03/31 16:42:24 by tpirinen          #+#    #+#             */
+/*   Updated: 2026/03/31 16:45:51 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	player_init(t_player *player)
+bool	touch(float px, float py, t_game *game)
 {
-	player->x = WIDTH / 2;
-	player->y = HEIGHT / 2;
-	player->angle = 270 * PI / 180;
-	player->fov = PI / 2.0f;
-	player->move_speed = 3;
-	player->turn_speed = 0.03;
-	player->key_up = false;
-	player->key_down = false;
-	player->key_right = false;
-	player->key_left = false;
-	player->left_rotate = false;
-	player->right_rotate = false;
+	int	x;
+	int	y;
+
+	x = px / BLOCK_SIZE;
+	y = py / BLOCK_SIZE;
+	if (game->map.arr[y][x] == '1')
+		return (true);
+	return (false);
 }

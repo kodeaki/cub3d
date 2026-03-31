@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_init.c                                      :+:      :+:    :+:   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 14:05:46 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/03/31 17:15:41 by tpirinen         ###   ########.fr       */
+/*   Created: 2026/03/31 15:56:24 by tpirinen          #+#    #+#             */
+/*   Updated: 2026/03/31 16:58:29 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	player_init(t_player *player)
+void	draw_map(t_game *game)
 {
-	player->x = WIDTH / 2;
-	player->y = HEIGHT / 2;
-	player->angle = 270 * PI / 180;
-	player->fov = PI / 2.0f;
-	player->move_speed = 3;
-	player->turn_speed = 0.03;
-	player->key_up = false;
-	player->key_down = false;
-	player->key_right = false;
-	player->key_left = false;
-	player->left_rotate = false;
-	player->right_rotate = false;
+	int	color;
+	int	y;
+	int	x;
+
+	color = 0xFFFFFF;
+	y = 0;
+	while (game->map.arr[y])
+	{
+		x = 0;
+		while (game->map.arr[y][x])
+		{
+			if (game->map.arr[y][x] == '1')
+				draw_square(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE,
+					color, game);
+			x++;
+		}
+		y++;
+	}
 }

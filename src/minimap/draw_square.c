@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_init.c                                      :+:      :+:    :+:   */
+/*   draw_square.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 14:05:46 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/03/31 17:15:41 by tpirinen         ###   ########.fr       */
+/*   Created: 2026/03/31 14:36:38 by tpirinen          #+#    #+#             */
+/*   Updated: 2026/03/31 14:41:09 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	player_init(t_player *player)
+void	draw_square(int x, int y, int size, int color, t_game *game)
 {
-	player->x = WIDTH / 2;
-	player->y = HEIGHT / 2;
-	player->angle = 270 * PI / 180;
-	player->fov = PI / 2.0f;
-	player->move_speed = 3;
-	player->turn_speed = 0.03;
-	player->key_up = false;
-	player->key_down = false;
-	player->key_right = false;
-	player->key_left = false;
-	player->left_rotate = false;
-	player->right_rotate = false;
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		put_pixel(x + i, y, color, game);
+		i++;
+	}
+	i = 0;
+	while (i < size)
+	{
+		put_pixel(x, y + i, color, game);
+		i++;
+	}
+	i = 0;
+	while (i < size)
+	{
+		put_pixel(x + size, y + i, color, game);
+		i++;
+	}
+	i = 0;
+	while (i < size)
+	{
+		put_pixel(x + i, y + size, color, game);
+		i++;
+	}
 }
