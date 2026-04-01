@@ -20,6 +20,7 @@ SRC				:=	main.c \
 					minimap/draw_line.c \
 					minimap/draw_loop.c \
 					minimap/draw_map.c \
+					minimap/draw_player.c \
 					minimap/draw_square.c \
 					minimap/touch.c \
 					parsing/map.c \

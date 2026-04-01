@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:56:24 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/03/31 16:58:29 by tpirinen         ###   ########.fr       */
+/*   Updated: 2026/04/01 15:26:58 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	draw_map(t_game *game)
 		while (game->map.arr[y][x])
 		{
 			if (game->map.arr[y][x] == '1')
-				draw_square(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE,
+				draw_square(x * 16, y * 16, 16,
 					color, game);
 			x++;
 		}

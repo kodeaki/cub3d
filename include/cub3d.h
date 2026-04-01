@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:54 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/03/31 16:54:29 by tpirinen         ###   ########.fr       */
+/*   Updated: 2026/04/01 15:34:14 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,9 @@ int		key_release(int keycode, t_player *player);
 // Drawing / Image output
 void	put_pixel(int x, int y, int color, t_game *game);
 void	draw_square(int x, int y, int size, int color, t_game *game);
-void	draw_line(t_player *player, t_game *game, float start_x);
+void	draw_player(int x, int y, int size, int color, t_game *game);
+void	draw_line(t_player *player, t_game *game, float start_x, int i);
+void	draw_line_map(t_player *player, t_game *game, float start_x);
 void	draw_map(t_game *game);
 void	clear_image(t_game *game);
 int		draw_loop(t_game *game);

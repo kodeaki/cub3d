@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:00:28 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/03/31 17:13:31 by tpirinen         ###   ########.fr       */
+/*   Updated: 2026/04/01 15:40:08 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,40 +18,44 @@ int draw_loop(t_game *game)
 
 	move_player(player);
 	clear_image(game);
-	draw_square(player->x - 10, player->y - 10, 20, 0x00FF00, game);
-	
-	// Below draws one line from player to a wall
-	// float	ray_x = player->x;
-	// float	ray_y = player->y;
-	// float	cos_angle = cos(player->angle);
-	// float	sin_angle = sin(player->angle);
-	// while(!touch(ray_x, ray_y, game))
-	// {
-	// 	put_pixel(ray_x + 10, ray_y + 10, 0xFF0000, game);
-	// 	ray_x += cos_angle;
-	// 	ray_y += sin_angle;
-	// }
 
-	// Draws a set amount of rays into a 90degree FOV
-	int		ray_count = 300;
+
+	
+	// draws a 3D raycast
+	float fraction = PI / 3 / WIDTH;
+	float start_x = player->angle - PI / 6;
+	int i = 0;
+	while (i < WIDTH)
+	{
+		draw_line(player, game, start_x, i);
+		start_x += fraction;
+		i++;
+	}
+
+	
+	// draws player onto minimap
+	draw_player(player->x, player->y, 20, 0x00FF00, game);
+	draw_map(game);
+
+	
+	// Draws a set amount of rays into players FOV on minimap
+	int		ray_count = 30;
 	float	step;
 	float	ray_angle;
-	int		i;
+	int		j = 0;
 
 	if (ray_count < 2)
 		ray_count = 2;
 	step = player->fov / (ray_count - 1);
 	ray_angle = player->angle - (player->fov / 2.0f);
 	i = 0;
-	while (i < ray_count)
+	while (j < ray_count)
 	{
-		draw_line(player, game, ray_angle);
+		draw_line_map(player, game, ray_angle);
 		ray_angle += step;
-		i++;
+		j++;
 	}
 
-	draw_map(game);
-	
 
 	mlx_put_image_to_window(game->mlx, game->window, game->image, 0, 0);
 	return (0);
