@@ -2,7 +2,7 @@
 NAME			:=	cub3d
 
 COMPILER		:=	cc
-COMPILER_FLAGS	:=	-Wall -Wextra -Werror
+COMPILER_FLAGS	:=	-Wall -Wextra -Werror -Wno-incompatible-pointer-types
 INCLUDES		:=	-I./include
 MLX_DIR			:=	./include/minilibx-linux
 LIBMLX			:=	$(MLX_DIR)/libmlx.a
