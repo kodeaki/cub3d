@@ -89,6 +89,7 @@ int		key_release(int keycode, t_player *player);
 // Drawing / Image output
 void	put_pixel(int x, int y, int color, t_game *game);
 void	draw_square(int x, int y, int size, int color, t_game *game);
+void	draw_minimap(t_game *game);
 void	draw_player(int x, int y, int size, int color, t_game *game);
 void	draw_line(t_player *player, t_game *game, float start_x, int i);
 void	draw_line_map(t_player *player, t_game *game, float start_x);

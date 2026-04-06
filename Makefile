@@ -2,6 +2,7 @@
 NAME			:=	cub3d
 
 COMPILER		:=	cc
+# -Wno-incompatible-pointer-types is added to prevent compile errors on arch systems
 COMPILER_FLAGS	:=	-Wall -Wextra -Werror -Wno-incompatible-pointer-types
 INCLUDES		:=	-I./include
 MLX_DIR			:=	./include/minilibx-linux
@@ -20,6 +21,7 @@ SRC				:=	main.c \
 					minimap/draw_line.c \
 					minimap/draw_loop.c \
 					minimap/draw_map.c \
+					minimap/draw_minimap.c\
 					minimap/draw_player.c \
 					minimap/draw_square.c \
 					minimap/touch.c \

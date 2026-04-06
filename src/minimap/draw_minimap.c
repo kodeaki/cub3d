@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_loop.c                                        :+:      :+:    :+:   */
+/*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,28 +12,38 @@
 
 #include "cub3d.h"
 
-int draw_loop(t_game *game)
+void	draw_minimap(t_game *game)
 {
 	t_player	*player = &game->player;
-
-	move_player(player);
-	clear_image(game);
-
+	int			i;
+	
+	// draws a black rectangle to top left corner for minimap
+	for (int i = 0; i < WIDTH / 4 - 7; i++){
+		for (int j = 0; j < HEIGHT / 4 - 19; j++){
+			put_pixel(i, j, 0x000000, game);
+		}
+	}
+	
+	// draws player onto minimap
+	draw_player(player->x, player->y, 20, 0x00FF00, game);
 
 	
-	// draws a 3D raycast
-	float fraction = PI / 3 / WIDTH;
-	float start_x = player->angle - PI / 6;
-	int i = 0;
-	while (i < WIDTH)
+	// Draws a set amount of rays into players FOV on minimap
+	int		ray_count = 30;
+	float	step;
+	float	ray_angle;
+
+	if (ray_count < 2)
+		ray_count = 2;
+	step = player->fov / (ray_count - 1);
+	ray_angle = player->angle - (player->fov / 2.0f);
+	i = 0;
+	while (i < ray_count)
 	{
-		draw_line(player, game, start_x, i);
-		start_x += fraction;
+		draw_line_map(player, game, ray_angle);
+		ray_angle += step;
 		i++;
 	}
 
-	draw_minimap(game);
-
-	mlx_put_image_to_window(game->mlx, game->window, game->image, 0, 0);
-	return (0);
+	draw_map(game);
 }
