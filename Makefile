@@ -1,13 +1,15 @@
+# Gigamakefile by tpirinen & jtarvain
 
 NAME			:=	cub3d
+LIBFT			:= libft/libft.a
 
 COMPILER		:=	cc
 # -Wno-incompatible-pointer-types is added to prevent compile errors on arch systems
 COMPILER_FLAGS	:=	-Wall -Wextra -Werror -Wno-incompatible-pointer-types
-INCLUDES		:=	-I./include
+INCLUDES		:=	-I./include -I./libft
 MLX_DIR			:=	./include/minilibx-linux
 LIBMLX			:=	$(MLX_DIR)/libmlx.a
-MLXFLAGS		:=	-L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
+MLXFLAGS		:=	-L$(MLX_DIR) -L./libft -lmlx -lft -lXext -lX11 -lm -lz
 
 SRC_DIR 		:=	src
 OBJ_DIR 		:=	obj
@@ -26,6 +28,8 @@ SRC				:=	main.c \
 					minimap/draw_square.c \
 					minimap/touch.c \
 					parsing/map.c \
+					parsing/utils.c \
+					parsing/parsing.c \
 					player/move_player.c
 
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRC))
@@ -38,17 +42,23 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBMLX)
+$(NAME): $(OBJS) $(LIBMLX) $(LIBFT)
 	$(COMPILER) $(COMPILER_FLAGS) $(OBJS) $(LIBMLX) $(MLXFLAGS) -o $(NAME)
 
 $(LIBMLX):
 	make -C $(MLX_DIR)
 
+$(LIBFT):
+	make -C libft/
+
 clean:
 	make clean -C $(MLX_DIR)
+	make clean -C libft/
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
+	rm -f $(LIBFT)
+	rm -f $(LIBMLX)
 	rm -f $(NAME)
 
 re: fclean all
