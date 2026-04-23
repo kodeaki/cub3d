@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:54 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/04/01 15:34:14 by tpirinen         ###   ########.fr       */
+/*   Updated: 2026/04/21 14:01:06 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,51 +29,21 @@
 # define PI 3.14159265359
 
 # include "minilibx-linux/mlx.h"
-
+# include "libft.h"
+# include "structs.h"
 # include <stdio.h>
 # include <stdlib.h>
-# include <stdbool.h>
 # include <math.h>
+# include <fcntl.h>
 
-typedef struct s_map
-{
-	char	**arr;
-	int		height;
-	int		width;
-}	t_map;				
 
-typedef struct s_player
-{
-	float		x;
-	float		y;
-	float		angle;
-	float		fov;
-	float		turn_speed;
-	int			move_speed;
-
-	bool		key_up;
-	bool		key_down;
-	bool		key_left;
-	bool		key_right;
-	bool		left_rotate;
-	bool		right_rotate;
-
-}	t_player;
-
-typedef struct s_game
-{
-	void		*mlx;
-	void		*window;
-	void		*image;
-
-	char		*data;
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-
-	t_map		map;
-	t_player	player;
-}	t_game;
+// Parsing
+int		parsing(int argc, char **argv, t_game *game);
+int		check_extension(char *file);
+int		load_map(int fd, t_game *game);
+int		process_line(t_game *game, char *line);
+void	ft_exit(int err, const char *msg);
+int		ft_close(int fd, int ret);
 
 // Initialization
 void	game_init(t_game *game);
