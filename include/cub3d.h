@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:54 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/04/21 14:01:06 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:35:07 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@
 // Parsing
 int		parsing(int argc, char **argv, t_game *game);
 int		check_extension(char *file);
-int		load_map(int fd, t_game *game);
-int		process_line(t_game *game, char *line);
+int		parse_file(int fd, t_game *game);
+int		process_line(t_game *game, char *line, int i);
 void	ft_exit(int err, const char *msg);
 int		ft_close(int fd, int ret);
+int		add_check(t_game *game, char *line);
 
 // Initialization
 void	game_init(t_game *game);

@@ -1,25 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   typedef.h                                          :+:      :+:    :+:   */
+/*   ft_strset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/20 14:55:52 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/04/23 17:25:52 by jtarvain         ###   ########.fr       */
+/*   Created: 2026/04/22 10:39:09 by jtarvain          #+#    #+#             */
+/*   Updated: 2026/04/23 00:15:38 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPEDEF_H
-# define TYPEDEF_H
+#include "cub3d.h"
 
-typedef struct s_parser	t_parser;
-typedef struct s_file	t_file;
-typedef struct s_check	t_check;
-typedef struct s_config	t_config;
-typedef struct s_rgb	t_rgb;
-typedef struct s_map	t_map;
-typedef struct s_player	t_player;
-typedef struct s_game	t_game;
-
-#endif

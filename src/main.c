@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:59 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/04/21 14:20:10 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/04/22 15:02:46 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 int	main(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
 	t_game	game;
 	
+	ft_bzero(&game, sizeof(game));
 	// Parsing
-	// if (parsing(argc, argv, &game))
-	// 	ft_exit(1, "Usage: ./cub3d /path_to_file.cub");
+	if (parsing(argc, argv, &game))
+		ft_exit(1, "Usage: ./cub3d /path_to_file.cub");
 
 	create_map(&game);
 	
