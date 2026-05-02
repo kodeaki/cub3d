@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+// /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   typedef.h                                          :+:      :+:    :+:   */
@@ -18,6 +18,8 @@ typedef struct s_check	t_check;
 typedef struct s_config	t_config;
 typedef struct s_rgb	t_rgb;
 typedef struct s_map	t_map;
+typedef struct s_point	t_point;
+typedef struct s_ray	t_ray;
 typedef struct s_player	t_player;
 typedef struct s_game	t_game;
 

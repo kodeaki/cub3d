@@ -55,6 +55,20 @@ struct s_map
 	int		width;
 };
 
+struct s_point
+{
+	float	x;
+	float	y;
+};
+
+struct s_ray
+{
+	t_point	origin;
+	t_point	hit;
+	t_point iter;
+	float	angle;
+};
+
 struct s_player
 {
 	float		x;
@@ -62,8 +76,13 @@ struct s_player
 	float		angle;
 	float		fov;
 	float		turn_speed;
-	int			move_speed;
+	float		move_speed;
 
+	float		cos_angle;
+	float		sin_angle;
+	float		move_x;
+	float		move_y;
+	
 	bool		key_up;
 	bool		key_down;
 	bool		key_left;

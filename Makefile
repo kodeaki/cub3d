@@ -19,18 +19,20 @@ SRC				:=	main.c \
 					key_presses.c \
 					initialization/game_init.c \
 					initialization/player_init.c \
-					minimap/clear_image.c \
-					minimap/draw_line.c \
-					minimap/draw_loop.c \
 					minimap/draw_map.c \
-					minimap/draw_minimap.c\
+					minimap/draw_minimap.c \
 					minimap/draw_player.c \
+					minimap/draw_rays.c \
 					minimap/draw_square.c \
-					minimap/touch.c \
 					parsing/map.c \
-					parsing/utils.c \
 					parsing/parsing.c \
-					player/move_player.c
+					parsing/utils.c \
+					player/move_player.c \
+					raycasting/clear_image.c \
+					raycasting/distance.c \
+					raycasting/draw_line.c \
+					raycasting/raycast.c \
+					raycasting/touch.c
 
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRC))
 OBJS			:=	$(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))

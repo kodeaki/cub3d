@@ -17,8 +17,10 @@ void	player_init(t_player *player)
 	player->x = WIDTH / 2;
 	player->y = HEIGHT / 2;
 	player->angle = 270 * PI / 180;
+	player->cos_angle = cos(player->angle);
+	player->sin_angle = sin(player->angle);
 	player->fov = PI / 2.0f;
-	player->move_speed = 3;
+	player->move_speed = 1.5f;
 	player->turn_speed = 0.03;
 	player->key_up = false;
 	player->key_down = false;

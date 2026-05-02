@@ -62,15 +62,19 @@ void	draw_square(int x, int y, int size, int color, t_game *game);
 void	draw_minimap(t_game *game);
 void	draw_player(int x, int y, int size, int color, t_game *game);
 void	draw_line(t_player *player, t_game *game, float start_x, int i);
-void	draw_line_map(t_player *player, t_game *game, float start_x);
+void	draw_rays(t_player *player, t_game *game);
 void	draw_map(t_game *game);
 void	clear_image(t_game *game);
-int		draw_loop(t_game *game);
+int		game_loop(t_game *game);
 
 // Raycasting
+float	distance(float x, float y);
+float	fixed_dist(t_ray *ray, float player_angle);
+void	raycast(t_game *game, t_player *player);
 bool	touch(float px, float py, t_game *game);
 
 // Player
-void	move_player(t_player *player);
+bool	player_collision(t_game *game, float x, float y);
+void	move_player(t_player *player, t_game *game);
 
 #endif

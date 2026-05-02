@@ -12,14 +12,13 @@
 
 #include "cub3d.h"
 
-void	move_player(t_player *player)
+bool	player_collision(t_game *game, float x, float y)
 {
-	float	cos_angle;
-	float	sin_angle;
-	float	move_x;
-	float	move_y;
-	float	move_len;
+	return (touch(x, y, game));
+}
 
+static void	rotate_player(t_player *player)
+{
 	if (player->left_rotate)
 		player->angle -= player->turn_speed;
 	if (player->right_rotate)
@@ -28,37 +27,59 @@ void	move_player(t_player *player)
 		player->angle = 0;
 	if (player->angle < 0)
 		player->angle = 2 * PI;
+	player->cos_angle = cos(player->angle);
+	player->sin_angle = sin(player->angle);
+}
 
-	cos_angle = cos(player->angle);
-	sin_angle = sin(player->angle);
-	move_x = 0.0f;
-	move_y = 0.0f;
+static void	calculate_movement(t_player *player)
+{
 	if (player->key_up)
 	{
-		move_x += cos_angle;
-		move_y += sin_angle;
+		player->move_x += player->cos_angle;
+		player->move_y += player->sin_angle;
 	}
 	if (player->key_down)
 	{
-		move_x -= cos_angle;
-		move_y -= sin_angle;
+		player->move_x -= player->cos_angle;
+		player->move_y -= player->sin_angle;
 	}
 	if (player->key_left)
 	{
-		move_x += sin_angle;
-		move_y -= cos_angle;
+		player->move_x += player->sin_angle;
+		player->move_y -= player->cos_angle;
 	}
 	if (player->key_right)
 	{
-		move_x -= sin_angle;
-		move_y += cos_angle;
+		player->move_x -= player->sin_angle;
+		player->move_y += player->cos_angle;
 	}
-	move_len = sqrtf(move_x * move_x + move_y * move_y);
-	if (move_len > 0.0f)
-	{
-		move_x /= move_len;
-		move_y /= move_len;
-		player->x += move_x * player->move_speed;
-		player->y += move_y * player->move_speed;
-	}
+}
+
+static void	apply_movement(t_player *player, t_game *game)
+{
+	float	move_len;
+	float	new_x;
+	float	new_y;
+
+	move_len = sqrtf(player->move_x * player->move_x
+			+ player->move_y * player->move_y);
+	if (move_len <= 0.0f)
+		return ;
+	player->move_x /= move_len;
+	player->move_y /= move_len;
+	new_x = player->x + player->move_x * player->move_speed;
+	new_y = player->y + player->move_y * player->move_speed;
+	if (!player_collision(game, new_x, player->y))
+		player->x = new_x;
+	if (!player_collision(game, player->x, new_y))
+		player->y = new_y;
+}
+
+void	move_player(t_player *player, t_game *game)
+{
+	player->move_x = 0.0f;
+	player->move_y = 0.0f;
+	rotate_player(player);
+	calculate_movement(player);
+	apply_movement(player, game);
 }

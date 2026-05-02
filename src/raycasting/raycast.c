@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_loop.c                                        :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 15:00:28 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/04/01 15:40:08 by tpirinen         ###   ########.fr       */
+/*   Created: 2026/03/31 16:51:44 by tpirinen          #+#    #+#             */
+/*   Updated: 2026/04/01 15:37:07 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int draw_loop(t_game *game)
+// draws a 3D raycast
+void	raycast(t_game *game, t_player *player)
 {
-	t_player	*player = &game->player;
+	float	fraction;
+	float	start_x;
+	int		i;
 
-	move_player(player);
-	clear_image(game);
-
-
-	
-	// draws a 3D raycast
-	float fraction = PI / 3 / WIDTH;
-	float start_x = player->angle - PI / 6;
-	int i = 0;
+	fraction = PI / 3 / WIDTH;
+	start_x = player->angle - PI / 6;
+	i = 0;
 	while (i < WIDTH)
 	{
 		draw_line(player, game, start_x, i);
 		start_x += fraction;
 		i++;
 	}
-
-	draw_minimap(game);
-
-	mlx_put_image_to_window(game->mlx, game->window, game->image, 0, 0);
-	return (0);
 }
