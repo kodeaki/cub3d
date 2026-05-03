@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 01:40:54 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/02 19:29:20 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/03 22:57:41 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	set_floor(char *line, t_game *game)
 {
 	size_t	pos;
 
-	if (!check_line(line))
+	if (!check_line(line, 1))
 		return (1);
 	if (validate_format(line, game))
 		return (1);
@@ -49,7 +49,7 @@ int	set_ceiling(char *line, t_game *game)
 {
 	size_t	pos;
 
-	if (!check_line(line))
+	if (!check_line(line, 1))
 		return (1);
 	if (validate_format(line, game))
 		return (1);

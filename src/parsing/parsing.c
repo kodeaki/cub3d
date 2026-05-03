@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 12:14:39 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/04/29 01:01:32 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/03 23:02:06 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
  * 111
  *
  *  Third part of parsing
- *  - populating t_config
  *  - validating map
  *  	floodfill
  *  	min - max validation on width
@@ -48,6 +47,8 @@ int	parsing(int argc, char **argv, t_game *game)
 	if (set_height(game))
 		return (1);
 	if (copy_file(argv, game))
+		return (1);
+	if (parse_map(game))
 		return (1);
 	return (0);
 }

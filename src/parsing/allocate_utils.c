@@ -6,18 +6,21 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 01:39:49 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/02 19:33:13 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/03 22:55:59 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-size_t	check_line(char *line)
+size_t	check_line(char *line, int mod)
 {
 	size_t	i;
 	size_t	k;
 
-	i = 3;
+	if (!mod)
+		i = 3;
+	else
+		i = 2;
 	if (!line[i] || ft_space(line[i]))
 		return (0);
 	while (line[i] && !ft_space(line[i]))

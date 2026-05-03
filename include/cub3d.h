@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:54 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/05/03 19:52:40 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/03 22:56:22 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		allocate_ea(char *line, t_game *game);
 int		allocate_we(char *line, t_game *game);
 int		set_floor(char *line, t_game *game);
 int		set_ceiling(char *line, t_game *game);
-size_t	check_line(char *line);
+size_t	check_line(char *line, int mod);
 int		ft_space(char c);
 void	free_map(char **map);
 int		set_color(char *line, int *color, size_t len);

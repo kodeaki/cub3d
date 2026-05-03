@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 00:20:34 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/02 19:35:45 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/03 22:57:41 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	allocate_no(char *line, t_game *game)
 {
 	size_t	len;
 
-	len = check_line(line);
+	len = check_line(line, 0);
 	if (len < 1)
 		return (1);
 	game->file.parser.no = malloc((sizeof(char) * len) + 1);
@@ -30,7 +30,7 @@ int	allocate_so(char *line, t_game *game)
 {
 	size_t	len;
 
-	len = check_line(line);
+	len = check_line(line, 0);
 	if (len < 1)
 		return (1);
 	game->file.parser.so = malloc((sizeof(char) * len) + 1);
@@ -44,7 +44,7 @@ int	allocate_ea(char *line, t_game *game)
 {
 	size_t	len;
 
-	len = check_line(line);
+	len = check_line(line, 0);
 	if (len < 1)
 		return (1);
 	game->file.parser.ea = malloc((sizeof(char) * len) + 1);
@@ -58,7 +58,7 @@ int	allocate_we(char *line, t_game *game)
 {
 	size_t	len;
 
-	len = check_line(line);
+	len = check_line(line, 0);
 	if (len < 1)
 		return (1);
 	game->file.parser.we = malloc((sizeof(char) * len) + 1);
