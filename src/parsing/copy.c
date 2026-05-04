@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 10:47:01 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/04/30 12:00:12 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/03 19:53:32 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	copy_file(char **argv, t_game *game)
 	return (ft_close(fd, 0));
 }
 
+// TODO: fix norminette
 int	get_elements(int fd, t_game *game)
 {
 	volatile int	i;
@@ -44,11 +45,8 @@ int	get_elements(int fd, t_game *game)
 		if (loading(fd, &i, &line, game))
 			return (ft_free(game), 1);
 	}
-	while (line)
-	{
-		if (loading_map(&line, game))
-			return (ft_free(game), 1);
-	}
+	if (loading_map(fd, &line, game))
+		return (ft_free(game), 1);
 	if (line)
 		free(line);
 	return (0);
@@ -56,7 +54,7 @@ int	get_elements(int fd, t_game *game)
 
 int	loading(int fd, volatile int *i, char **line, t_game *game)
 {
-	if (load_line(line, game))
+	if (load_line(*line, game))
 		return (free(*line), 1);
 	free(*line);
 	*line = get_next_line(fd);
@@ -66,11 +64,30 @@ int	loading(int fd, volatile int *i, char **line, t_game *game)
 	return (0);
 }
 
-int	loading_map(char **line, t_game *game)
+int	loading_map(int fd, char **line, t_game *game)
 {
-	// TODO alloc map
-	(void)line;
-	(void)game;
+	int	i;
+
+	i = 0;
+	errno = 0;
+	game->file.raw_map[i] = ft_strdup(*line);
+	if (!game->file.raw_map[i++])
+		return (free(*line), 1);
+	while (*line)
+	{
+		free(*line);
+		*line = get_next_line(fd);
+		if (!*line)
+		{
+			if (errno != 0)
+				return (1);
+			return (0);
+		}
+		game->file.raw_map[i] = ft_strdup(*line);
+		if (!game->file.raw_map[i])
+			return (free(*line), 1);
+		i++;
+	}
 	return (0);
 }
 

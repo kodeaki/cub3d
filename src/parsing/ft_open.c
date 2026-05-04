@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 09:07:49 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/04/27 16:52:36 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/02 19:30:51 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ int	parse_file(int fd, t_game *game)
 	while (line)
 	{
 		if (process_line(game, line, i))
-			return (free(line), ft_close(fd, 0));
+			return (free(line), 0);
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
 	if (line)
 		free(line);
-	return (ft_close(fd, i));
+	return (i);
 }
 
 int	process_line(t_game *game, char *line, int i)

@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:54 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/04/30 11:59:27 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/03 19:52:40 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <fcntl.h>
-
+# include <errno.h>
 
 // Parsing
 int		parsing(int argc, char **argv, t_game *game);
@@ -52,7 +52,7 @@ int		empty_row(char *line);
 int		get_elements(int fd, t_game *game);
 int		loading(int fd, volatile int *i, char **line, t_game *game);
 int		load_line(char *line, t_game *game);
-int		loading_map(char **line, t_game *game);
+int		loading_map(int fd, char **line, t_game *game);
 int		set_height(t_game *game);
 void	ft_free(t_game *game);
 void	ft_exit(int err, const char *msg);
@@ -65,6 +65,9 @@ int		set_ceiling(char *line, t_game *game);
 size_t	check_line(char *line);
 int		ft_space(char c);
 void	free_map(char **map);
+int		set_color(char *line, int *color, size_t len);
+int		safe_atoi(const char *str, int *err);
+
 
 // Initialization
 void	game_init(t_game *game);

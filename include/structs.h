@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 14:56:02 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/04/29 23:06:29 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/02 18:17:20 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ struct s_parser
 	char	*so;
 	char	*we;
 	char	*ea;
-	char	*c;
-	char	*f;
 	size_t	r_len;
 	size_t	g_len;
 	size_t	b_len;

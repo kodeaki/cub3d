@@ -39,6 +39,8 @@ SRC				:=	main.c \
 					parsing/floor_ceiling.c \
 					parsing/allocate.c \
 					parsing/allocate_utils.c \
+					parsing/safe_atoi.c \
+					parsing/ft_free.c \
 					player/move_player.c
 
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRC))
