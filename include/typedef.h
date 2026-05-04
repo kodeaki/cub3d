@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 14:55:52 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/04/21 13:57:27 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:25:52 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define TYPEDEF_H
 
 typedef struct s_parser	t_parser;
+typedef struct s_file	t_file;
 typedef struct s_check	t_check;
 typedef struct s_config	t_config;
 typedef struct s_rgb	t_rgb;

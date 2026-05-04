@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:59 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/04/21 14:20:10 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/04 14:37:04 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	(void)argc;
-	(void)argv;
-	// if (parsing(argc, argv, &game))
-	// 	ft_exit(1, "Usage: ./cub3d /path_to_file.cub");
+	if (parsing(argc, argv, &game))
+		ft_exit(1, "Usage: ./cub3d /path_to_file.cub");
 	create_map(&game);
 	game_init(&game);
 	mlx_hook(game.window, 2, 1L << 0, key_press, &game.player);

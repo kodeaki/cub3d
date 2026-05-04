@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 14:56:02 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/04/21 13:21:43 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/04 12:56:07 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ struct s_parser
 	char	*so;
 	char	*we;
 	char	*ea;
-	char	*c;
-	char	*f;
+	size_t	r_len;
+	size_t	g_len;
+	size_t	b_len;
+	int		player_x;
+	int		player_y;
+	int		player_count;
 };
 
 struct s_check
@@ -34,11 +38,6 @@ struct s_check
 	int	ea;
 	int	c;
 	int	f;
-};
-
-struct s_config
-{
-
 };
 
 struct s_rgb
@@ -92,6 +91,26 @@ struct s_player
 
 };
 
+struct s_file
+{
+	t_parser	parser;
+	t_check		check;
+	int			map_start;
+	int			line_count;
+	char		**raw_map;
+};
+
+struct s_config
+{
+	void	*no_texture;
+	void	*so_texture;
+	void	*ea_texture;
+	void	*we_texture;
+	t_rgb	f;
+	t_rgb	c;
+};
+
+
 struct s_game
 {
 	void		*mlx;
@@ -105,6 +124,8 @@ struct s_game
 
 	t_map		map;
 	t_player	player;
+	t_config	config;
+	t_file		file;
 };
 
 #endif
