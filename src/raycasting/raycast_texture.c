@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
+/*   raycast_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,20 +12,8 @@
 
 #include "cub3d.h"
 
-// draws a 3D raycast with all white walls
-void	raycast(t_game *game, t_player *player)
+// draws a 3D raycast with textures
+void	raycast_texture(t_game *game, t_player *player)
 {
-	float	fraction;
-	float	start_x;
-	int		i;
 
-	fraction = PI / 3 / WIDTH;
-	start_x = player->angle - PI / 6;
-	i = 0;
-	while (i < WIDTH)
-	{
-		draw_line(player, game, start_x, i);
-		start_x += fraction;
-		i++;
-	}
 }
