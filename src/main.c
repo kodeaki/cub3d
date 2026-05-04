@@ -14,12 +14,9 @@
 
 int	game_loop(t_game *game)
 {
-	t_player	*player;
-
-	player = &game->player;
 	clear_image(game);
-	move_player(player, game);
-	raycast(game, player);
+	move_player(&game->player, game);
+	raycast(game, &game->player);
 	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->window, game->image, 0, 0);
 	return (0);
