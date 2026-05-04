@@ -12,20 +12,42 @@
 
 #include "cub3d.h"
 
+static uint32_t	convert_rgb_to_hex(t_rgb *rgb)
+{
+	uint32_t	r;
+	uint32_t	g;
+	uint32_t	b;
+
+	r = (uint32_t)rgb->r;
+	g = (uint32_t)rgb->g;
+	b = (uint32_t)rgb->b;
+	return (r << 16 | g << 8 | b);
+}
+
+// Clears old frame by painting the top half with the ceiling color
+// and the bottom half with the floor color
 void	clear_image(t_game *game)
 {
 	int	y;
 	int	x;
+	uint32_t	ceiling;
+	uint32_t	floor;
 
+	ceiling = convert_rgb_to_hex(&game->config.c);
+	floor = convert_rgb_to_hex(&game->config.f);
 	y = 0;
+	while (y < HEIGHT / 2)
+	{
+		x = 0;
+		while (x < WIDTH)
+			put_pixel(x++, y, ceiling, game);
+		y++;
+	}
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
-		{
-			put_pixel(x, y, 0, game);
-			x++;
-		}
+			put_pixel(x++, y, floor, game);
 		y++;
 	}
 }
