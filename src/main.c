@@ -29,6 +29,7 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
+	ft_bzero(&game, sizeof(game));
 	if (parsing(argc, argv, &game))
 		ft_exit(1, "Usage: ./cub3d /path_to_file.cub");
 	create_map(&game);
