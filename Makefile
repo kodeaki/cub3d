@@ -30,7 +30,7 @@ SRC				:=	main.c \
 					raycasting/distance.c \
 					raycasting/draw_line.c \
 					raycasting/raycast.c \
-					raycasting/touch.c
+					raycasting/touch.c \
 					parsing/utils.c \
 					parsing/parse_utils.c \
 					parsing/parsing.c \
@@ -41,8 +41,7 @@ SRC				:=	main.c \
 					parsing/allocate_utils.c \
 					parsing/safe_atoi.c \
 					parsing/ft_free.c \
-					parsing/parse_map.c \
-					player/move_player.c
+					parsing/parse_map.c
 
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRC))
 OBJS			:=	$(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
