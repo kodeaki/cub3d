@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:54 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/04/23 17:35:07 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/04/30 11:59:27 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,32 @@
 
 // Parsing
 int		parsing(int argc, char **argv, t_game *game);
+int		open_file(int argc, char **argv, t_game *game);
+int		copy_file(char **argv, t_game *game);
 int		check_extension(char *file);
 int		parse_file(int fd, t_game *game);
 int		process_line(t_game *game, char *line, int i);
-void	ft_exit(int err, const char *msg);
+int		ft_strset(const char *str, const char *set);
 int		ft_close(int fd, int ret);
 int		add_check(t_game *game, char *line);
+int		ft_check(t_game *game);
+int		empty_row(char *line);
+int		get_elements(int fd, t_game *game);
+int		loading(int fd, volatile int *i, char **line, t_game *game);
+int		load_line(char *line, t_game *game);
+int		loading_map(char **line, t_game *game);
+int		set_height(t_game *game);
+void	ft_free(t_game *game);
+void	ft_exit(int err, const char *msg);
+int		allocate_no(char *line, t_game *game);
+int		allocate_so(char *line, t_game *game);
+int		allocate_ea(char *line, t_game *game);
+int		allocate_we(char *line, t_game *game);
+int		set_floor(char *line, t_game *game);
+int		set_ceiling(char *line, t_game *game);
+size_t	check_line(char *line);
+int		ft_space(char c);
+void	free_map(char **map);
 
 // Initialization
 void	game_init(t_game *game);

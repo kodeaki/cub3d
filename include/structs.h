@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 14:56:02 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/04/23 22:54:31 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/04/29 23:06:29 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ struct s_parser
 	char	*ea;
 	char	*c;
 	char	*f;
+	size_t	r_len;
+	size_t	g_len;
+	size_t	b_len;
 };
 
 struct s_check
@@ -92,7 +95,8 @@ struct s_file
 	t_parser	parser;
 	t_check		check;
 	int			map_start;
-	char		**file;
+	int			line_count;
+	char		**raw_map;
 };
 
 struct s_config

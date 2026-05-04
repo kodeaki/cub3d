@@ -6,30 +6,41 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 19:44:19 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/04/24 09:14:49 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/04/24 13:28:23 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		add_check(t_game *game, char *line)
+int	ft_check(t_game *game)
 {
-	if (!ft_strncmp(line, "NO ", 3))
-		game->file->check->no++;
-	else if (!ft_strncmp(line, "SO ", 3))
-		game->file->check->so++;
-	else if (!ft_strncmp(line, "EA ", 3))
-		game->file->check->ea++;
-	else if (!ft_strncmp(line, "WE ", 3))
-		game->file->check->we++;
-	else if (!ft_strncmp(line, "C ", 2))
-		game->file->check->c++;
-	else if (!ft_strncmp(line, "F ", 2))
-		game->file->check->f++;
+	t_check	checker;
+
+	checker = game->file.check;
+	if (checker.c != 1 || checker.f != 1 || checker.no != 1 ||
+			checker.so != 1 || checker.we != 1 || checker.ea != 1)
+		return (1);
+	if (!game->file.map_start)
+		return (1);
 	return (0);
 }
 
-int		ft_strset(const char *str, const char *set)
+int	empty_row(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!(line[i] == ' ' || line[i] == '\t' || line[i] == '\v' ||
+				line[i] == '\n'))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	ft_strset(const char *str, const char *set)
 {
 	int	i;
 	int	j;

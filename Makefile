@@ -3,9 +3,9 @@
 NAME			:=	cub3d
 LIBFT			:= libft/libft.a
 
-COMPILER		:=	cc
+COMPILER		:=	gcc
 # -Wno-incompatible-pointer-types is added to prevent compile errors on arch systems
-COMPILER_FLAGS	:=	-Wall -Wextra -Werror -Wno-incompatible-pointer-types
+COMPILER_FLAGS	:=	-Wall -Wextra -Werror -Wno-incompatible-pointer-types -g
 INCLUDES		:=	-I./include -I./libft
 MLX_DIR			:=	./include/minilibx-linux
 LIBMLX			:=	$(MLX_DIR)/libmlx.a
@@ -25,14 +25,21 @@ SRC				:=	main.c \
 					minimap/draw_rays.c \
 					minimap/draw_square.c \
 					parsing/map.c \
-					parsing/parsing.c \
-					parsing/utils.c \
 					player/move_player.c \
 					raycasting/clear_image.c \
 					raycasting/distance.c \
 					raycasting/draw_line.c \
 					raycasting/raycast.c \
 					raycasting/touch.c
+					parsing/utils.c \
+					parsing/parse_utils.c \
+					parsing/parsing.c \
+					parsing/ft_open.c \
+					parsing/copy.c \
+					parsing/floor_ceiling.c \
+					parsing/allocate.c \
+					parsing/allocate_utils.c \
+					player/move_player.c
 
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRC))
 OBJS			:=	$(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
