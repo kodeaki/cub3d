@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 14:56:02 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/02 18:17:20 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/04 12:56:07 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ struct s_parser
 	size_t	r_len;
 	size_t	g_len;
 	size_t	b_len;
+	int		player_x;
+	int		player_y;
+	int		player_count;
 };
 
 struct s_check

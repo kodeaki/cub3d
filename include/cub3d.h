@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:54 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/05/03 22:56:22 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/04 14:08:49 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ int		ft_space(char c);
 void	free_map(char **map);
 int		set_color(char *line, int *color, size_t len);
 int		safe_atoi(const char *str, int *err);
+int		parse_map(t_game *game);
+int		find_width(t_game *game);
+void	print_parser(t_game *game);
 
 
 // Initialization
