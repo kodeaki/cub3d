@@ -6,19 +6,11 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 01:40:54 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/03 22:57:41 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/06 23:19:47 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// example: "F 21,21,21"
-//
-// TODO
-//
-// safe long ft_atoi(const char *str)
-//
-// populate struct t_rgb
 
 static int	validate_format(char *line, t_game *game);
 static int	check_rgb_lens(t_game *game);
@@ -94,12 +86,11 @@ static int	validate_format(char *line, t_game *game)
 
 static int	check_rgb_lens(t_game *game)
 {
-	if (!game->file.parser.r_len || !game->file.parser.g_len ||
-			!game->file.parser.b_len)
+	if (!game->file.parser.r_len || !game->file.parser.g_len
+		|| !game->file.parser.b_len)
 		return (1);
-	if (game->file.parser.r_len > 3 || game->file.parser.g_len > 3 ||
-			game->file.parser.b_len > 3)
+	if (game->file.parser.r_len > 3 || game->file.parser.g_len > 3
+		|| game->file.parser.b_len > 3)
 		return (1);
 	return (0);
-
 }

@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 19:24:28 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/05 17:49:40 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/06 23:27:06 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ int	set_height(t_game *game)
 	return (0);
 }
 
-void	ft_exit(int	err, const char *msg)
+void	ft_exit(int err, const char *msg)
 {
 	printf("Error.\n");
 	printf("%s\n", msg);
 	exit(err);
 }
 
-int		ft_close(int fd, int ret)
+int	ft_close(int fd, int ret)
 {
 	close(fd);
 	return (ret);

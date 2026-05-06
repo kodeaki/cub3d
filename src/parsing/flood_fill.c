@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 12:53:01 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/06 17:31:46 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/06 23:15:04 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	flood_fill(t_game *game)
 
 void	fill(t_game *game, int **visited, int y, int x)
 {
-	// base case
 	if (y < 0 || y > game->map.height || x < 0 || x > game->map.width)
 		return ;
 	if (game->map.arr[y][x] == '1')

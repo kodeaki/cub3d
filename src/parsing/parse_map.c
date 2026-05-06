@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 23:03:38 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/06 15:58:21 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/06 23:20:43 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,10 @@
 
 int	parse_map(t_game *game)
 {
-	// scan through the map, finding:
-	// player position & width
-	printf("parse_map enter\n");
 	if (scan_map(game))
 		return (ft_free(game), 1);
-	// allocate map 2d array and fill
-	printf("game width: %i\n", game->map.width);
 	if (copy_map(game))
 		return (ft_free(game), 1);
-	// flood fill with visited 2d array
 	if (flood_fill(game))
 		return (1);
 	return (0);
@@ -61,7 +55,7 @@ int	row_width(t_game *game, const char *row, const int y)
 		if (row[i] == '1')
 			last_wall = i + 1;
 		if (row[i] == 'N' || row[i] == 'S' || row[i] == 'E'
-				|| row[i] == 'W')
+			|| row[i] == 'W')
 		{
 			game->file.parser.player_x = i;
 			game->file.parser.player_y = y;

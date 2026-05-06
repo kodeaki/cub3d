@@ -3,7 +3,7 @@
 NAME			:=	cub3d
 LIBFT			:= libft/libft.a
 
-COMPILER		:=	gcc
+COMPILER		:=	cc
 # -Wno-incompatible-pointer-types is added to prevent compile errors on arch systems
 COMPILER_FLAGS	:=	-Wall -Wextra -Werror -Wno-incompatible-pointer-types -g
 INCLUDES		:=	-I./include -I./libft
