@@ -13,15 +13,16 @@
 #ifndef TYPEDEF_H
 # define TYPEDEF_H
 
-typedef struct s_parser	t_parser;
-typedef struct s_file	t_file;
-typedef struct s_check	t_check;
-typedef struct s_config	t_config;
-typedef struct s_rgb	t_rgb;
-typedef struct s_map	t_map;
-typedef struct s_point	t_point;
-typedef struct s_ray	t_ray;
-typedef struct s_player	t_player;
-typedef struct s_game	t_game;
+typedef struct s_parser 	t_parser;
+typedef struct s_file   	t_file;
+typedef struct s_check  	t_check;
+typedef struct s_config 	t_config;
+typedef struct s_rgb    	t_rgb;
+typedef struct s_map    	t_map;
+typedef struct s_minimap	t_minimap;
+typedef struct s_point	    t_point;
+typedef struct s_ray	    t_ray;
+typedef struct s_player	    t_player;
+typedef struct s_game	    t_game;
 
 #endif

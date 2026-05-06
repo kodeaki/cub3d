@@ -26,7 +26,8 @@ void	draw_map(t_game *game)
 		while (game->map.arr[y][x])
 		{
 			if (game->map.arr[y][x] == '1')
-				draw_square(x * 16, y * 16, 16, color, game);
+				draw_square(x * game->minimap.cell, y * game->minimap.cell, game->minimap.cell, color, game);
+			// draw_square(x * (game->window_height * 0.25f / game->map.height), y * (game->window_height * 0.25f / game->map.height), (game->window_height * 0.25f / game->map.height), color, game);
 			x++;
 		}
 		y++;

@@ -12,26 +12,35 @@
 
 #include "cub3d.h"
 
+static void draw_minimap_background(t_game *game)
+{
+	int		x;
+	int		y;
+
+	game->minimap.width = game->map.width * game->minimap.cell;
+	game->minimap.height = game->map.height * game->minimap.cell;
+	x = 0;
+	while (x < game->minimap.width)
+	{
+		y = 0;
+		while (y < game->minimap.height)
+		{
+			put_pixel(x, y, 0x000000, game);
+			y++;
+		}
+		x++;
+	}
+}
+
 // Clears minimap with a black rectangle, draws rays, player, and map
 void	draw_minimap(t_game *game)
 {
-	t_player	*player;
-	int			i;
-	int			j;
-
-	player = &game->player;
-	i = 0;
-	while (i < WIDTH / 4 - 7)
-	{
-		j = 0;
-		while (j < HEIGHT / 4 - 19)
-		{
-			put_pixel(i, j, 0x000000, game);
-			j++;
-		}
-		i++;
-	}
-	draw_rays(player, game);
-	draw_player(player->x, player->y, 20, 0x00FF00, game);
+	game->minimap.cell = (int)(game->window_width / 4) / game->map.width;
+	draw_minimap_background(game);
+	draw_rays(&game->player, game);
+	draw_player(
+		(int)((game->player.x / BLOCK_SIZE) * game->minimap.cell),
+		(int)((game->player.y / BLOCK_SIZE) * game->minimap.cell),
+		game->minimap.cell / 4, 0x00FF00, game);
 	draw_map(game);
 }

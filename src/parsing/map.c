@@ -15,6 +15,8 @@
 void	create_map(t_game *game)
 {
 	game->map.arr = (char **)malloc(sizeof(char *) * 11);
+	game->map.width = 18;
+	game->map.height = 10;
 	game->map.arr[0] = "111111111111111111";
 	game->map.arr[1] = "100000000000000001";
 	game->map.arr[2] = "100000000001000001";

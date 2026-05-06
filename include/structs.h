@@ -55,6 +55,13 @@ struct s_map
 	int		width;
 };
 
+struct s_minimap
+{
+	int	width;
+	int	height;
+	int	cell;
+};
+
 struct s_point
 {
 	float	x;
@@ -111,12 +118,14 @@ struct s_config
 	t_rgb	c;
 };
 
-
 struct s_game
 {
 	void		*mlx;
 	void		*window;
 	void		*image;
+
+	float		window_width;
+	float		window_height;
 
 	char		*data;
 	int			bits_per_pixel;
@@ -124,6 +133,7 @@ struct s_game
 	int			endian;
 
 	t_map		map;
+	t_minimap	minimap;
 	t_player	player;
 	t_config	config;
 	t_file		file;

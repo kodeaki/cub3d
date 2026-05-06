@@ -25,7 +25,8 @@ void	draw_ray(t_player *player, t_game *game, float start_x)
 	ray_y = player->y;
 	while (!touch(ray_x, ray_y, game))
 	{
-		put_pixel(ray_x / 4, ray_y / 4, 0xFF0000, game);
+		put_pixel((int)((ray_x / BLOCK_SIZE) * game->minimap.cell),
+			(int)((ray_y / BLOCK_SIZE) * game->minimap.cell), 0xFF0000, game);
 		ray_x += cos_angle;
 		ray_y += sin_angle;
 	}
