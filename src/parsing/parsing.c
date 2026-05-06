@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 12:14:39 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/04 14:09:29 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/06 15:58:21 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ int	parsing(int argc, char **argv, t_game *game)
 {
 	if (open_file(argc, argv, game))
 		return (1);
-	printf("Parsing info start\n");
-	printf("Map line start: %i\n", game->file.map_start);
-	printf("Map rows: %i\n", game->file.line_count - game->file.map_start);
 	if (set_height(game))
 		return (1);
 	if (copy_file(argv, game))
@@ -51,6 +48,7 @@ int	parsing(int argc, char **argv, t_game *game)
 	print_parser(game);
 	if (parse_map(game))
 		return (1);
+	print_map(game->map.arr);
 	return (0);
 }
 

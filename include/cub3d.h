@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:54 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/05/04 14:08:49 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/06 15:43:15 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,15 @@ int		safe_atoi(const char *str, int *err);
 int		parse_map(t_game *game);
 int		find_width(t_game *game);
 void	print_parser(t_game *game);
-
+int		scan_map(t_game *game);
+int		row_width(t_game *game, const char *row, const int y);
+int		copy_map(t_game *game);
+void	free_mapc(void **map, int i);
+// void	free_mapc(char **map, int i);
+int		copy_row(t_game *game, int row);
+void	print_map(char **map);
+int		flood_fill(t_game *game);
+int		allocate_visited(t_game *game);
 
 // Initialization
 void	game_init(t_game *game);

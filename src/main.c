@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:59 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/05/04 14:37:04 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/06 15:29:07 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ int	main(int argc, char **argv)
 	ft_bzero(&game, sizeof(game));
 	if (parsing(argc, argv, &game))
 		ft_exit(1, "Usage: ./cub3d /path_to_file.cub");
-	create_map(&game);
-	game_init(&game);
-	mlx_hook(game.window, 2, 1L << 0, key_press, &game.player);
-	mlx_hook(game.window, 3, 1L << 1, key_release, &game.player);
-	mlx_loop_hook(game.mlx, game_loop, &game);
-	mlx_loop(game.mlx);
+	ft_free(&game);
+	// create_map(&game);
+	// game_init(&game);
+	// mlx_hook(game.window, 2, 1L << 0, key_press, &game.player);
+	// mlx_hook(game.window, 3, 1L << 1, key_release, &game.player);
+	// mlx_loop_hook(game.mlx, game_loop, &game);
+	// mlx_loop(game.mlx);
 	return (0);
 }

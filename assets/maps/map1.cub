@@ -3,7 +3,7 @@ SO ./path_to_south
 WE ./path_to_west
 EA ./path_to_east      
 
-F 0,100,0
+F 100,100,100
 C 0,200,255
 
 

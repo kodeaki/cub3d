@@ -41,7 +41,11 @@ SRC				:=	main.c \
 					parsing/allocate_utils.c \
 					parsing/safe_atoi.c \
 					parsing/ft_free.c \
-					parsing/parse_map.c
+					parsing/parse_map.c \
+					parsing/copy_map.c \
+					parsing/flood_fill.c \
+					parsing/flood_utils.c
+
 
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRC))
 OBJS			:=	$(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))

@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 10:47:01 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/03 19:53:32 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/06 11:25:31 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	copy_file(char **argv, t_game *game)
 	return (ft_close(fd, 0));
 }
 
-// TODO: fix norminette
 int	get_elements(int fd, t_game *game)
 {
 	volatile int	i;
