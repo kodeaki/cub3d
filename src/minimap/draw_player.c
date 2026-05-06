@@ -15,29 +15,17 @@
 void	draw_player(int x, int y, int size, int color, t_game *game)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	while (i < size)
+	i = x - size;
+	while (i <= x + size)
 	{
-		put_pixel((x + i) / 4 - 3, y / 4 - 3, color, game);
-		i++;
-	}
-	i = 0;
-	while (i < size)
-	{
-		put_pixel(x / 4 - 3, (y + i) / 4 - 3, color, game);
-		i++;
-	}
-	i = 0;
-	while (i < size)
-	{
-		put_pixel((x + size) / 4 - 3, (y + i) / 4 - 3, color, game);
-		i++;
-	}
-	i = 0;
-	while (i < size)
-	{
-		put_pixel((x + i) / 4 - 3, (y + size) / 4 - 3, color, game);
+		j = y - size;
+		while (j <= y + size)
+		{
+			put_pixel(i, j, color, game);
+			j++;
+		}
 		i++;
 	}
 }

@@ -26,7 +26,7 @@ float	fixed_dist(t_ray *ray, float player_angle)
 
 	delta_x = ray->hit.x - ray->origin.x;
 	delta_y = ray->hit.y - ray->origin.y;
-	angle = atan2(delta_y, delta_x) - player_angle;
+	angle = ray->angle - player_angle;
 	fix_dist = distance(delta_x, delta_y) * cos(angle);
 	return (fix_dist);
 }

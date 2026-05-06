@@ -16,7 +16,7 @@ void	put_pixel(int x, int y, int color, t_game *game)
 {
 	int	index;
 
-	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
+	if (x >= game->window_width || y >= game->window_height || x < 0 || y < 0)
 		return ;
 	index = y * game->size_line + x * game->bits_per_pixel / 8;
 	game->data[index] = color & 0xFF;

@@ -18,7 +18,6 @@ SRC				:=	main.c \
 					put_pixel.c \
 					key_presses.c \
 					initialization/game_init.c \
-					initialization/player_init.c \
 					minimap/draw_map.c \
 					minimap/draw_minimap.c \
 					minimap/draw_player.c \
@@ -28,7 +27,6 @@ SRC				:=	main.c \
 					player/move_player.c \
 					raycasting/clear_image.c \
 					raycasting/distance.c \
-					raycasting/draw_line.c \
 					raycasting/raycast.c \
 					raycasting/touch.c \
 					parsing/utils.c \

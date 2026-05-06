@@ -13,8 +13,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define WIDTH 1185
-# define HEIGHT 720
+// # define WIDTH 1185
+// # define HEIGHT 720
 
 # define BLOCK_SIZE 64
 
@@ -74,21 +74,19 @@ void	print_parser(t_game *game);
 
 // Initialization
 void	game_init(t_game *game);
-void	player_init(t_player *player);
 
 // Parsing / Map
 void	create_map(t_game *game);
 
 // Key presses
-int		key_press(int keycode, t_player *player);
-int		key_release(int keycode, t_player *player);
+int		key_press(int keycode, t_game *game);
+int		key_release(int keycode, t_game *game);
 
 // Drawing / Image output
 void	put_pixel(int x, int y, int color, t_game *game);
 void	draw_square(int x, int y, int size, int color, t_game *game);
 void	draw_minimap(t_game *game);
 void	draw_player(int x, int y, int size, int color, t_game *game);
-void	draw_line(t_player *player, t_game *game, float start_x, int i);
 void	draw_rays(t_player *player, t_game *game);
 void	draw_map(t_game *game);
 void	clear_image(t_game *game);

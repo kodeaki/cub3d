@@ -36,17 +36,17 @@ void	clear_image(t_game *game)
 	ceiling = convert_rgb_to_hex(&game->config.c);
 	floor = convert_rgb_to_hex(&game->config.f);
 	y = 0;
-	while (y < HEIGHT / 2)
+	while (y < game->window_height / 2)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < game->window_width)
 			put_pixel(x++, y, ceiling, game);
 		y++;
 	}
-	while (y < HEIGHT)
+	while (y < game->window_height)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < game->window_width)
 			put_pixel(x++, y, floor, game);
 		y++;
 	}
