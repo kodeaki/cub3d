@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 14:56:02 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/04 12:56:07 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:51:58 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ struct s_rgb
 struct s_map
 {
 	char	**arr;
+	int		**visited;
 	int		height;
 	int		width;
 };

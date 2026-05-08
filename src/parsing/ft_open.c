@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 09:07:49 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/02 19:30:51 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/06 23:24:14 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	open_file(int argc, char **argv, t_game *game)
 	if (!game->file.line_count)
 		return (ft_close(fd, 1));
 	if (ft_check(game))
-		return (ft_close(fd,1));
+		return (ft_close(fd, 1));
 	return (0);
 }
 
@@ -35,7 +35,7 @@ int	parse_file(int fd, t_game *game)
 {
 	char	*line;
 	int		i;
-	
+
 	line = get_next_line(fd);
 	i = 0;
 	if (!line)
@@ -65,9 +65,9 @@ int	process_line(t_game *game, char *line, int i)
 	}
 	if (!ft_strset(line, "10NSEW "))
 		return (0);
-	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3) ||
-			!ft_strncmp(line, "EA ", 3) || !ft_strncmp(line, "WE ", 3) ||
-			!ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
+	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
+		|| !ft_strncmp(line, "EA ", 3) || !ft_strncmp(line, "WE ", 3)
+		|| !ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
 	{
 		add_check(game, line);
 		return (0);
@@ -91,7 +91,7 @@ int	check_extension(char *file)
 	return (0);
 }
 
-int		add_check(t_game *game, char *line)
+int	add_check(t_game *game, char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3))
 		game->file.check.no++;

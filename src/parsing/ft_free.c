@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 19:22:54 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/03 19:28:47 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/06 15:43:15 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,12 @@ void	free_map(char **map)
 	i = 0;
 	while (map[i])
 		free(map[i++]);
+	free(map);
+}
+
+void	free_mapc(void **map, int i)
+{
+	while (i > 0)
+		free(map[--i]);
 	free(map);
 }
