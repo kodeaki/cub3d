@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 12:14:39 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/06 23:17:13 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/08 15:00:05 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	parsing(int argc, char **argv, t_game *game)
 		return (1);
 	if (copy_file(argv, game))
 		return (1);
-	print_parser(game);
+	// print_parser(game);
 	if (parse_map(game))
 		return (1);
-	print_map(game->map.arr);
+	// print_map(game->map.arr);
 	return (0);
 }
 

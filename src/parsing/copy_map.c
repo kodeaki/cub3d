@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 17:07:57 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/06 15:54:18 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/08 15:01:13 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	print_map(char **map)
 	int	i;
 
 	i = 0;
-	printf("in print map\n");
 	while (map[i])
 	{
 		printf("%s\n", map[i]);
