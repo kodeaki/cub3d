@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	draw_player(int x, int y, int size, int color, t_game *game)
+void	draw_player(t_game *game, int size, int color, int x, int y)
 {
 	int	i;
 	int	j;
@@ -23,7 +23,7 @@ void	draw_player(int x, int y, int size, int color, t_game *game)
 		j = y - size;
 		while (j <= y + size)
 		{
-			put_pixel(i, j, color, game);
+			put_pixel(game, color, i, j);
 			j++;
 		}
 		i++;

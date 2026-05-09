@@ -12,6 +12,22 @@
 
 #include "cub3d.h"
 
+static void	textures_init(t_game *game, t_texture *texture)
+{
+	int	w;
+	int	h;
+
+	texture->img = mlx_xpm_file_to_image(game->mlx, texture->path, &w, &h);
+	if (texture->img == NULL)
+	{
+		printf("Error: Failed to load texture %s\n", texture->path);
+		// frees
+		exit(1);
+	}
+	texture->data = mlx_get_data_addr(texture->img, &texture->bpp,
+			&texture->size_line, &texture->endian);
+}
+
 static void	player_init(t_game *game)
 {
 	game->player.x = game->window_width * 0.5f;
@@ -46,5 +62,9 @@ void	game_init(t_game *game)
 							 game->window_height);
 	game->data = mlx_get_data_addr(game->image, &game->bits_per_pixel,
 			&game->size_line, &game->endian);
+	textures_init(game, &game->config.north);
+	textures_init(game, &game->config.south);
+	textures_init(game, &game->config.east);
+	textures_init(game, &game->config.west);
 	mlx_put_image_to_window(game->mlx, game->window, game->image, 0, 0);
 }

@@ -18,10 +18,6 @@
 
 struct s_parser
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
 	size_t	r_len;
 	size_t	g_len;
 	size_t	b_len;
@@ -61,18 +57,15 @@ struct s_minimap
 	int	cell;
 };
 
-struct s_point
-{
-	float	x;
-	float	y;
-};
-
 struct s_ray
 {
-	t_point	origin;
-	t_point	hit;
-	t_point iter;
-	float	angle;
+    float		x;
+	float		y;
+	float		angle;
+	float		cos_angle;
+	float		sin_angle;
+	float		dist;
+	int			hit;
 };
 
 struct s_player
@@ -88,7 +81,7 @@ struct s_player
 	float		sin_angle;
 	float		move_x;
 	float		move_y;
-	
+
 	bool		key_up;
 	bool		key_down;
 	bool		key_left;
@@ -107,12 +100,22 @@ struct s_file
 	char		**raw_map;
 };
 
+struct s_texture
+{
+	int			bpp;
+	int			size_line;
+	int			endian;
+	void		*img;
+	char		*data;
+	char		*path;
+};
+
 struct s_config
 {
-	void	*no_texture;
-	void	*so_texture;
-	void	*ea_texture;
-	void	*we_texture;
+	t_texture	north;
+	t_texture	south;
+	t_texture	east;
+	t_texture	west;
 	t_rgb	f;
 	t_rgb	c;
 };
@@ -136,6 +139,7 @@ struct s_game
 	t_player	player;
 	t_config	config;
 	t_file		file;
+	t_ray		ray;
 };
 
 #endif

@@ -56,8 +56,8 @@ int	parsing(int argc, char **argv, t_game *game)
 
 void	print_parser(t_game *game)
 {
-	printf("no texture: %s\n", game->file.parser.no);
-	printf("so texture: %s\n", game->file.parser.so);
-	printf("we texture: %s\n", game->file.parser.we);
-	printf("ea texture: %s\n", game->file.parser.ea);
+	printf("no texture: %s\n", game->config.north.path);
+	printf("so texture: %s\n", game->config.south.path);
+	printf("we texture: %s\n", game->config.west.path);
+	printf("ea texture: %s\n", game->config.east.path);
 }

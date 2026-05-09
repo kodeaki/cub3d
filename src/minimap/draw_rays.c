@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	draw_ray(t_player *player, t_game *game, float start_x)
+static void	draw_ray_minimap(t_player *player, t_game *game, float start_x)
 {
 	float	cos_angle;
 	float	sin_angle;
@@ -23,10 +23,11 @@ void	draw_ray(t_player *player, t_game *game, float start_x)
 	sin_angle = sin(start_x);
 	ray_x = player->x;
 	ray_y = player->y;
-	while (!touch(ray_x, ray_y, game))
+	while (!touch(game, ray_x, ray_y))
 	{
-		put_pixel((int)((ray_x / BLOCK_SIZE) * game->minimap.cell),
-			(int)((ray_y / BLOCK_SIZE) * game->minimap.cell), 0xFF0000, game);
+		put_pixel(game, 0xFF0000,
+			(int)((ray_x / BLOCK_SIZE) * game->minimap.cell),
+			(int)((ray_y / BLOCK_SIZE) * game->minimap.cell));
 		ray_x += cos_angle;
 		ray_y += sin_angle;
 	}
@@ -48,7 +49,7 @@ void	draw_rays(t_player *player, t_game *game)
 	i = 0;
 	while (i < ray_count)
 	{
-		draw_ray(player, game, ray_angle);
+		draw_ray_minimap(player, game, ray_angle);
 		ray_angle += step;
 		i++;
 	}

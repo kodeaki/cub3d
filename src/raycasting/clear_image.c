@@ -40,14 +40,14 @@ void	clear_image(t_game *game)
 	{
 		x = 0;
 		while (x < game->window_width)
-			put_pixel(x++, y, ceiling, game);
+			put_pixel(game, ceiling, x++, y);
 		y++;
 	}
 	while (y < game->window_height)
 	{
 		x = 0;
 		while (x < game->window_width)
-			put_pixel(x++, y, floor, game);
+			put_pixel(game, floor, x++, y);
 		y++;
 	}
 }

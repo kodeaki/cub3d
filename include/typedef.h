@@ -23,6 +23,7 @@ typedef struct s_minimap	t_minimap;
 typedef struct s_point	    t_point;
 typedef struct s_ray	    t_ray;
 typedef struct s_player	    t_player;
+typedef struct s_texture	t_texture;
 typedef struct s_game	    t_game;
 
 #endif
