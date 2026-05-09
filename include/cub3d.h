@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:54 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/05/06 17:21:42 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/09 18:19:25 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ int		scan_map(t_game *game);
 int		row_width(t_game *game, const char *row, const int y);
 int		copy_map(t_game *game);
 void	free_mapc(void **map, int i);
-// void	free_mapc(char **map, int i);
 int		copy_row(t_game *game, int row);
 void	print_map(char **map);
 int		flood_fill(t_game *game);
 void	fill(t_game *game, int **visited, int y, int x);
 int		compare(t_game *game, char **map, int **visited);
 int		allocate_visited(t_game *game);
+int		free_mlx(t_game *game);
 
 // Initialization
 void	game_init(t_game *game);

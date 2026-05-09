@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:46:16 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/03/31 15:19:54 by tpirinen         ###   ########.fr       */
+/*   Updated: 2026/05/09 18:22:54 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int	key_press(int keycode, t_game *game)
 	if (keycode == RIGHT)
 		game->player.right_rotate = true;
 	if (keycode == ESC)
-	{
-		exit(0);
-	}
+		free_mlx(game);
 	return (0);
 }
 
