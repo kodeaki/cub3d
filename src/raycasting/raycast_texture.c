@@ -14,26 +14,16 @@
 
 static int	texture_to_color(t_texture *texture, int texture_x, int texture_y)
 {
-	int	bytes_per_pixel;
 	int	index;
-	char	*pixel;
 	int	color;
 
-	if (texture_x < 0)
-		texture_x = 0;
-	if (texture_y < 0)
-		texture_y = 0;
-	if (texture_x >= BLOCK_SIZE)
-		texture_x = BLOCK_SIZE - 1;
-	if (texture_y >= BLOCK_SIZE)
-		texture_y = BLOCK_SIZE - 1;
-	bytes_per_pixel = texture->bpp / 8;
-	index = texture_y * texture->size_line;
-	index = index + texture_x * bytes_per_pixel;
-	pixel = texture->data + index;
-	color = (unsigned char)pixel[0];
-	color = color | ((unsigned char)pixel[1] << 8);
-	color = color | ((unsigned char)pixel[2] << 16);
+	if (!texture->data)
+		return (0);
+	if (texture_x < 0 || texture_x >= BLOCK_SIZE
+		|| texture_y < 0 || texture_y >= BLOCK_SIZE)
+		return (0);
+	index = (texture_y * texture->size_line) + (texture_x * (texture->bpp / 8));
+	color = *(unsigned int *)(texture->data + index);
 	return (color);
 }
 
@@ -50,11 +40,11 @@ static int get_texture_x(t_game *game, int orientation)
 	return (texture_x);
 }
 
-static int get_texture_y(t_game *game, int start_y, float height)
+static int get_texture_y(int current_y, int wall_top, float height)
 {
 	int	texture_y;
 
-	texture_y = (int)((float)(start_y - game->window_height / 2)
+	texture_y = (int)((float)(current_y - wall_top)
 			/ height * BLOCK_SIZE);
 	if (texture_y < 0)
 		texture_y = 0;
@@ -94,7 +84,8 @@ static int	get_orientation(t_game *game)
 	}
 }
 
-static int	get_texture_color(t_game *game, int start_y, float height)
+static int	get_texture_color(t_game *game, int current_y,
+				int wall_top, float height)
 {
 	int		orientation;
 	t_texture	*texture;
@@ -107,7 +98,7 @@ static int	get_texture_color(t_game *game, int start_y, float height)
 	if (texture == NULL || texture->data == NULL)
 		return (0);
 	texture_x = get_texture_x(game, orientation);
-	texture_y = get_texture_y(game, start_y, height);
+	texture_y = get_texture_y(current_y, wall_top, height);
 	color = texture_to_color(texture, texture_x, texture_y);
 	return (color);
 }
@@ -123,10 +114,10 @@ static float	calculate_ray_distance(t_game *game)
 	delta_x = game->ray.x - game->player.x;
 	delta_y = game->ray.y - game->player.y;
 	distance = sqrtf(delta_x * delta_x + delta_y * delta_y);
-	angle_diff = game->ray.angle - game->player.angle;
+	if (distance < 0.0001f)
+		distance = 0.0001f;
+	angle_diff = fabsf(game->ray.angle - game->player.angle);
 	corrected = distance * cosf(angle_diff);
-	if (corrected < 0.0001f)
-		corrected = 0.0001f;
 	return (corrected);
 }
 
@@ -135,14 +126,17 @@ static void	draw_line(t_game *game, int i)
 	float	height;
 	int		start_y;
 	int		end_y;
+	int		wall_top;
 
 	game->ray.dist = calculate_ray_distance(game);
 	height = (BLOCK_SIZE / game->ray.dist) * (game->window_width / 2);
 	start_y = (game->window_height - height) / 2;
 	end_y = start_y + height;
+	wall_top = start_y;
 	while (start_y < end_y)
 	{
-		put_pixel(game, get_texture_color(game, start_y, height), i, start_y);
+		put_pixel(game, get_texture_color(game, start_y, wall_top, height),
+			i, start_y);
 		start_y++;
 	}
 }
@@ -167,8 +161,9 @@ static void	cast_ray(t_game *game)
 
 static void	draw_ray(t_game *game, float ray_angle, int i)
 {
-	game->ray.cos_angle = cos(ray_angle);
-	game->ray.sin_angle = sin(ray_angle);
+	game->ray.angle = ray_angle;
+	game->ray.cos_angle = cosf(ray_angle);
+	game->ray.sin_angle = sinf(ray_angle);
 	cast_ray(game);
 	draw_line(game, i);
 }
@@ -177,18 +172,20 @@ static void	draw_ray(t_game *game, float ray_angle, int i)
 void	raycast_texture(t_game *game)
 {
 	int				i;
-	float			angle_step;
+	float			half_fov;
+	float			camera_x;
+	float			ray_angle;
 
-	game->ray.angle = game->player.angle - (game->player.fov / 2.0f);
-	if (game->window_width > 1)
-		angle_step = game->player.fov / (float)(game->window_width - 1);
-	else
-		angle_step = 0.0f;
+	half_fov = game->player.fov * 0.5f;
 	i = 0;
 	while (i < game->window_width)
 	{
-		draw_ray(game, game->ray.angle, i);
-		game->ray.angle += angle_step;
+		if (game->window_width > 1)
+			camera_x = (2.0f * (float)i / (game->window_width - 1)) - 1.0f;
+		else
+			camera_x = 0.0f;
+		ray_angle = game->player.angle + atanf(camera_x * tanf(half_fov));
+		draw_ray(game, ray_angle, i);
 		i++;
 	}
 }

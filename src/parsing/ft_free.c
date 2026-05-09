@@ -14,14 +14,14 @@
 
 void	ft_free(t_game *game)
 {
-	if (game->file.parser.no)
-		free(game->file.parser.no);
-	if (game->file.parser.so)
-		free(game->file.parser.so);
-	if (game->file.parser.ea)
-		free(game->file.parser.ea);
-	if (game->file.parser.we)
-		free(game->file.parser.we);
+	if (game->config.north.path)
+		free(game->config.north.path);
+	if (game->config.south.path)
+		free(game->config.south.path);
+	if (game->config.east.path)
+		free(game->config.east.path);
+	if (game->config.west.path)
+		free(game->config.west.path);
 	if (game->file.raw_map)
 		free_map(game->file.raw_map);
 	if (game->map.arr)
