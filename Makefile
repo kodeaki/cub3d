@@ -22,11 +22,11 @@ SRC				:=	main.c \
 					minimap/draw_minimap.c \
 					minimap/draw_player.c \
 					minimap/draw_rays.c \
-					minimap/draw_square.c \
-					parsing/map.c \
 					player/move_player.c \
 					raycasting/clear_image.c \
 					raycasting/raycast_texture.c \
+					raycasting/texture_color.c \
+					raycasting/texture_cords.c \
 					raycasting/touch.c \
 					parsing/utils.c \
 					parsing/parse_utils.c \

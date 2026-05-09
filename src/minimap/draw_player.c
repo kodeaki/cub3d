@@ -12,11 +12,15 @@
 
 #include "cub3d.h"
 
-void	draw_player(t_game *game, int size, int color, int x, int y)
+void	draw_player(t_game *game, int size, int color)
 {
+	int	x;
+	int	y;
 	int	i;
 	int	j;
 
+	x = (int)((game->player.x / BLOCK_SIZE) * game->minimap.cell);
+	y = (int)((game->player.y / BLOCK_SIZE) * game->minimap.cell);
 	i = x - size;
 	while (i <= x + size)
 	{

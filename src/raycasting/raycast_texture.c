@@ -12,97 +12,6 @@
 
 #include "cub3d.h"
 
-static int	texture_to_color(t_texture *texture, int texture_x, int texture_y)
-{
-	int	index;
-	int	color;
-
-	if (!texture->data)
-		return (0);
-	if (texture_x < 0 || texture_x >= BLOCK_SIZE
-		|| texture_y < 0 || texture_y >= BLOCK_SIZE)
-		return (0);
-	index = (texture_y * texture->size_line) + (texture_x * (texture->bpp / 8));
-	color = *(unsigned int *)(texture->data + index);
-	return (color);
-}
-
-static int get_texture_x(t_game *game, int orientation)
-{
-	int	texture_x;
-
-	if (game->ray.hit == VERTICAL)
-		texture_x = (int)game->ray.y % BLOCK_SIZE;
-	if (game->ray.hit == HORIZONTAL)
-		texture_x = (int)game->ray.x % BLOCK_SIZE;
-	if (orientation == NO || orientation == EA)
-		texture_x = BLOCK_SIZE - texture_x - 1;
-	return (texture_x);
-}
-
-static int get_texture_y(int current_y, int wall_top, float height)
-{
-	int	texture_y;
-
-	texture_y = (int)((float)(current_y - wall_top)
-			/ height * BLOCK_SIZE);
-	if (texture_y < 0)
-		texture_y = 0;
-	if (texture_y >= BLOCK_SIZE)
-		texture_y = BLOCK_SIZE - 1;
-	return (texture_y);
-}
-
-static t_texture	*select_texture(t_game *game, int orientation)
-{
-	if (orientation == NO)
-		return (&game->config.north);
-	if (orientation == SO)
-		return (&game->config.south);
-	if (orientation == EA)
-		return (&game->config.east);
-	if (orientation == WE)
-		return (&game->config.west);
-	return (NULL);
-}
-
-static int	get_orientation(t_game *game)
-{
-	if (game->ray.hit == VERTICAL)
-	{
-		if (game->ray.cos_angle > 0)
-			return (EA);
-		else
-			return (WE);
-	}
-	else
-	{
-		if (game->ray.sin_angle > 0)
-			return (SO);
-		else
-			return (NO);
-	}
-}
-
-static int	get_texture_color(t_game *game, int current_y,
-				int wall_top, float height)
-{
-	int		orientation;
-	t_texture	*texture;
-	int		texture_x;
-	int		texture_y;
-	int		color;
-
-	orientation = get_orientation(game);
-	texture = select_texture(game, orientation);
-	if (texture == NULL || texture->data == NULL)
-		return (0);
-	texture_x = get_texture_x(game, orientation);
-	texture_y = get_texture_y(current_y, wall_top, height);
-	color = texture_to_color(texture, texture_x, texture_y);
-	return (color);
-}
-
 static float	calculate_ray_distance(t_game *game)
 {
 	float	delta_x;
@@ -147,7 +56,7 @@ static void	cast_ray(t_game *game)
 
 	game->ray.x = game->player.x;
 	game->ray.y = game->player.y;
-	while(!touch(game, game->ray.x, game->ray.y))
+	while (!touch(game, game->ray.x, game->ray.y))
 	{
 		game->ray.x += game->ray.cos_angle;
 		game->ray.y += game->ray.sin_angle;
@@ -171,10 +80,10 @@ static void	draw_ray(t_game *game, float ray_angle, int i)
 /* draws a 3D raycast with textures */
 void	raycast_texture(t_game *game)
 {
-	int				i;
-	float			half_fov;
-	float			camera_x;
-	float			ray_angle;
+	int		i;
+	float	half_fov;
+	float	camera_x;
+	float	ray_angle;
 
 	half_fov = game->player.fov * 0.5f;
 	i = 0;

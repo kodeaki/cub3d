@@ -28,8 +28,8 @@ static uint32_t	convert_rgb_to_hex(t_rgb *rgb)
 // and the bottom half with the floor color
 void	clear_image(t_game *game)
 {
-	int	y;
-	int	x;
+	int			y;
+	int			x;
 	uint32_t	ceiling;
 	uint32_t	floor;
 

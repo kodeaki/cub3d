@@ -21,7 +21,7 @@ static void	texture_init(t_game *game, t_texture *texture)
 	if (texture->img == NULL)
 	{
 		printf("Error: Failed to load texture %s\n", texture->path);
-		// frees
+		free_mlx(game);
 		exit(1);
 	}
 	texture->data = mlx_get_data_addr(texture->img, &texture->bpp,
@@ -57,9 +57,9 @@ void	game_init(t_game *game)
 	game->window_height = screen_height * 0.4;
 	player_init(game);
 	game->window = mlx_new_window(game->mlx, game->window_width,
-							   game->window_height, "cub3d");
+			game->window_height, "cub3d");
 	game->image = mlx_new_image(game->mlx, game->window_width,
-							 game->window_height);
+			game->window_height);
 	game->data = mlx_get_data_addr(game->image, &game->bits_per_pixel,
 			&game->size_line, &game->endian);
 	texture_init(game, &game->config.north);

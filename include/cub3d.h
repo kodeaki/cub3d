@@ -13,7 +13,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define BLOCK_SIZE 64
+# define BLOCK_SIZE 128
 # define VERTICAL 0
 # define HORIZONTAL 1
 
@@ -101,9 +101,8 @@ int		key_release(int keycode, t_game *game);
 
 // Drawing / Image output
 void	put_pixel(t_game *game, int color, int x, int y);
-void	draw_square(t_game *game, int size, int color, int x, int y);
 void	draw_minimap(t_game *game);
-void	draw_player(t_game *game, int size, int color, int x, int y);
+void	draw_player(t_game *game, int size, int color);
 void	draw_rays(t_player *player, t_game *game);
 void	draw_map(t_game *game);
 void	clear_image(t_game *game);
@@ -114,6 +113,10 @@ float	distance(float x, float y);
 float	fixed_dist(t_ray *ray, float player_angle);
 // void	raycast(t_game *game, t_player *player);
 void	raycast_texture(t_game *game);
+int		get_texture_color(t_game *game, int current_y,
+				int wall_top, float height);
+int		get_texture_x(t_game *game, int orientation);
+int		get_texture_y(int current_y, int wall_top, float height);
 bool	touch(t_game *game, float px, float py);
 
 // Player

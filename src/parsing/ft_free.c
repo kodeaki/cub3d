@@ -47,24 +47,24 @@ void	free_mapc(void **map, int i)
 
 int	free_mlx(t_game *game)
 {
-    ft_free(game);
-    if (game->image)
-        mlx_destroy_image(game->mlx, game->image);
-    if (game->config.north.img)
-        mlx_destroy_image(game->mlx, game->config.north.img);
-    if (game->config.south.img)
-        mlx_destroy_image(game->mlx, game->config.south.img);
-    if (game->config.east.img)
-        mlx_destroy_image(game->mlx, game->config.east.img);
-    if (game->config.west.img)
-        mlx_destroy_image(game->mlx, game->config.west.img);
-    if (game->window)
-        mlx_destroy_window(game->mlx, game->window);
-    if (game->mlx)
-    {
-        mlx_destroy_display(game->mlx);
-        free(game->mlx);
+	ft_free(game);
+	if (game->image)
+		mlx_destroy_image(game->mlx, game->image);
+	if (game->config.north.img)
+		mlx_destroy_image(game->mlx, game->config.north.img);
+	if (game->config.south.img)
+		mlx_destroy_image(game->mlx, game->config.south.img);
+	if (game->config.east.img)
+		mlx_destroy_image(game->mlx, game->config.east.img);
+	if (game->config.west.img)
+		mlx_destroy_image(game->mlx, game->config.west.img);
+	if (game->window)
+		mlx_destroy_window(game->mlx, game->window);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
 		exit(0);
-    }
+	}
 	return (0);
 }

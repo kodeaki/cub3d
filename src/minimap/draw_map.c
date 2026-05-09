@@ -12,13 +12,31 @@
 
 #include "cub3d.h"
 
-void	draw_map(t_game *game)
+static void	draw_square(t_game *game, int size, int x, int y)
 {
 	int	color;
+	int	i;
+
+	color = 0xFFFFFF;
+	i = -1;
+	while (++i < size)
+		put_pixel(game, color, x + i, y);
+	i = -1;
+	while (++i < size)
+		put_pixel(game, color, x, y + i);
+	i = -1;
+	while (++i < size)
+		put_pixel(game, color, x + size, y + i);
+	i = -1;
+	while (++i < size)
+		put_pixel(game, color, x + i, y + size);
+}
+
+void	draw_map(t_game *game)
+{
 	int	y;
 	int	x;
 
-	color = 0xFFFFFF;
 	y = 0;
 	while (game->map.arr[y])
 	{
@@ -26,7 +44,9 @@ void	draw_map(t_game *game)
 		while (game->map.arr[y][x])
 		{
 			if (game->map.arr[y][x] == '1')
-				draw_square(game, game->minimap.cell, color, x * game->minimap.cell, y * game->minimap.cell);
+				draw_square(game, game->minimap.cell,
+					x * game->minimap.cell,
+					y * game->minimap.cell);
 			x++;
 		}
 		y++;
