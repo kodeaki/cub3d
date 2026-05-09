@@ -13,10 +13,9 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-// # define WIDTH 1185
-// # define HEIGHT 720
-
 # define BLOCK_SIZE 64
+# define VERTICAL 0
+# define HORIZONTAL 1
 
 # define W      119
 # define A      97
@@ -27,6 +26,14 @@
 # define ESC    65307
 
 # define PI 3.14159265359
+
+enum e_orientation
+{
+	NO,
+	SO,
+	EA,
+	WE,
+};
 
 # include "minilibx-linux/mlx.h"
 # include "libft.h"
@@ -93,10 +100,10 @@ int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 
 // Drawing / Image output
-void	put_pixel(int x, int y, int color, t_game *game);
-void	draw_square(int x, int y, int size, int color, t_game *game);
+void	put_pixel(t_game *game, int color, int x, int y);
+void	draw_square(t_game *game, int size, int color, int x, int y);
 void	draw_minimap(t_game *game);
-void	draw_player(int x, int y, int size, int color, t_game *game);
+void	draw_player(t_game *game, int size, int color, int x, int y);
 void	draw_rays(t_player *player, t_game *game);
 void	draw_map(t_game *game);
 void	clear_image(t_game *game);
@@ -105,8 +112,9 @@ int		game_loop(t_game *game);
 // Raycasting
 float	distance(float x, float y);
 float	fixed_dist(t_ray *ray, float player_angle);
-void	raycast(t_game *game, t_player *player);
-bool	touch(float px, float py, t_game *game);
+// void	raycast(t_game *game, t_player *player);
+void	raycast_texture(t_game *game);
+bool	touch(t_game *game, float px, float py);
 
 // Player
 bool	player_collision(t_game *game, float x, float y);

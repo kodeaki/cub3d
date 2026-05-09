@@ -19,10 +19,10 @@ int	allocate_no(char *line, t_game *game)
 	len = check_line(line, 0);
 	if (len < 1)
 		return (1);
-	game->file.parser.no = malloc((sizeof(char) * len) + 1);
-	if (!game->file.parser.no)
+	game->config.north.path = malloc((sizeof(char) * len) + 1);
+	if (!game->config.north.path)
 		return (1);
-	ft_strlcpy(game->file.parser.no, &line[3], len + 1);
+	ft_strlcpy(game->config.north.path, &line[3], len + 1);
 	return (0);
 }
 
@@ -33,10 +33,10 @@ int	allocate_so(char *line, t_game *game)
 	len = check_line(line, 0);
 	if (len < 1)
 		return (1);
-	game->file.parser.so = malloc((sizeof(char) * len) + 1);
-	if (!game->file.parser.so)
+	game->config.south.path = malloc((sizeof(char) * len) + 1);
+	if (!game->config.south.path)
 		return (1);
-	ft_strlcpy(game->file.parser.so, &line[3], len + 1);
+	ft_strlcpy(game->config.south.path, &line[3], len + 1);
 	return (0);
 }
 
@@ -47,10 +47,10 @@ int	allocate_ea(char *line, t_game *game)
 	len = check_line(line, 0);
 	if (len < 1)
 		return (1);
-	game->file.parser.ea = malloc((sizeof(char) * len) + 1);
-	if (!game->file.parser.ea)
+	game->config.east.path = malloc((sizeof(char) * len) + 1);
+	if (!game->config.east.path)
 		return (1);
-	ft_strlcpy(game->file.parser.ea, &line[3], len + 1);
+	ft_strlcpy(game->config.east.path, &line[3], len + 1);
 	return (0);
 }
 
@@ -61,9 +61,9 @@ int	allocate_we(char *line, t_game *game)
 	len = check_line(line, 0);
 	if (len < 1)
 		return (1);
-	game->file.parser.we = malloc((sizeof(char) * len) + 1);
-	if (!game->file.parser.we)
+	game->config.west.path = malloc((sizeof(char) * len) + 1);
+	if (!game->config.west.path)
 		return (1);
-	ft_strlcpy(game->file.parser.we, &line[3], len + 1);
+	ft_strlcpy(game->config.west.path, &line[3], len + 1);
 	return (0);
 }

@@ -26,8 +26,7 @@ SRC				:=	main.c \
 					parsing/map.c \
 					player/move_player.c \
 					raycasting/clear_image.c \
-					raycasting/distance.c \
-					raycasting/raycast.c \
+					raycasting/raycast_texture.c \
 					raycasting/touch.c \
 					parsing/utils.c \
 					parsing/parse_utils.c \

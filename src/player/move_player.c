@@ -14,7 +14,7 @@
 
 bool	player_collision(t_game *game, float x, float y)
 {
-	return (touch(x, y, game));
+	return (touch(game, x, y));
 }
 
 static void	rotate_player(t_player *player)
