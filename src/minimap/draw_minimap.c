@@ -38,9 +38,8 @@ void	draw_minimap(t_game *game)
 	game->minimap.cell = (int)(game->window_width / 4) / game->map.width;
 	draw_minimap_background(game);
 	draw_rays(&game->player, game);
-	draw_player(game, 0x00FF00,
+	draw_player(game, game->minimap.cell / 4, 0x00FF00,
 		(int)((game->player.x / BLOCK_SIZE) * game->minimap.cell),
-		(int)((game->player.y / BLOCK_SIZE) * game->minimap.cell),
-		game->minimap.cell / 4);
+		(int)((game->player.y / BLOCK_SIZE) * game->minimap.cell));
 	draw_map(game);
 }

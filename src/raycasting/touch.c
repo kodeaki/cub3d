@@ -19,7 +19,12 @@ bool	touch(t_game *game, float px, float py)
 
 	x = px / BLOCK_SIZE;
 	y = py / BLOCK_SIZE;
-	if (game->map.arr[y][x] == '1')
+	if (x < 0 || y < 0)
+		return (true);
+	if (x >= game->map.width || y >= game->map.height)
+		return (true);
+	if (game->map.arr[y][x] == '1'
+		|| game->map.arr[y][x] == ' ')
 		return (true);
 	return (false);
 }
