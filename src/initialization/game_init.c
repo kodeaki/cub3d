@@ -30,8 +30,8 @@ static void	texture_init(t_game *game, t_texture *texture)
 
 static void	player_init(t_game *game)
 {
-	game->player.x = game->window_width * 0.5f;
-	game->player.y = game->window_height * 0.5f;
+	game->player.x = game->file.parser.player_x * BLOCK_SIZE;
+	game->player.y = game->file.parser.player_y * BLOCK_SIZE;
 	game->player.angle = 270 * PI / 180;
 	game->player.cos_angle = cos(game->player.angle);
 	game->player.sin_angle = sin(game->player.angle);
