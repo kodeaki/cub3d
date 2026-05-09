@@ -108,7 +108,7 @@ void	draw_rays(t_player *player, t_game *game);
 void	draw_map(t_game *game);
 void	clear_image(t_game *game);
 int		game_loop(t_game *game);
-
+	
 // Raycasting
 float	distance(float x, float y);
 float	fixed_dist(t_ray *ray, float player_angle);

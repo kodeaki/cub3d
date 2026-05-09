@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:59 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/05/06 18:11:54 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/05/06 15:29:07 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int	main(int argc, char **argv)
 	mlx_hook(game.window, 3, 1L << 1, key_release, &game);
 	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_loop(game.mlx);
+	ft_free(&game);
 	return (0);
 }
