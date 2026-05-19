@@ -58,10 +58,7 @@ int	process_line(t_game *game, char *line, int i)
 	if (!ft_strset(line, "10NSEW ") && !game->file.map_start)
 	{
 		if (empty_row(line))
-		{
-			game->file.map_start = i;
-			return (0);
-		}
+			return (game->file.map_start = i, 0);
 	}
 	if (!ft_strset(line, "10NSEW "))
 	{

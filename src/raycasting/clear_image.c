@@ -26,7 +26,7 @@ static uint32_t	convert_rgb_to_hex(t_rgb *rgb)
 
 // Clears old frame by painting the top half with the ceiling color
 // and the bottom half with the floor color
-void clear_image(t_game *game)
+void	clear_image(t_game *game)
 {
 	uint32_t	ceiling;
 	uint32_t	floor;
@@ -38,7 +38,6 @@ void clear_image(t_game *game)
 	floor = convert_rgb_to_hex(&game->config.f);
 	buf = (uint32_t *)game->data;
 	total = (size_t)game->window_width * (size_t)game->window_height;
-
 	i = 0;
 	while (i < total / 2)
 	{
@@ -52,4 +51,3 @@ void clear_image(t_game *game)
 		i++;
 	}
 }
-
