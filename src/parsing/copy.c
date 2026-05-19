@@ -21,10 +21,9 @@ int	copy_file(char **argv, t_game *game)
 	fd = open(argv[1], O_RDONLY, 0);
 	if (fd < 0)
 		return (1);
-	game->file.raw_map = malloc(sizeof(char *) * (map_size + 1));
+	game->file.raw_map = ft_calloc(map_size + 1, sizeof(char *));
 	if (!game->file.raw_map)
 		return (ft_close(fd, 1));
-	(game->file.raw_map)[map_size] = NULL;
 	if (get_elements(fd, game))
 		return (ft_close(fd, 1));
 	return (ft_close(fd, 0));

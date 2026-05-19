@@ -50,6 +50,7 @@ int	row_width(t_game *game, const char *row, const int y)
 	int	last_wall;
 
 	i = 0;
+	last_wall = 0;
 	while (row[i])
 	{
 		if (row[i] == '1')

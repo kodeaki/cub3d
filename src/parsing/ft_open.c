@@ -64,7 +64,11 @@ int	process_line(t_game *game, char *line, int i)
 		}
 	}
 	if (!ft_strset(line, "10NSEW "))
+	{
+		if (game->file.map_start && !empty_row(line))
+			return (1);
 		return (0);
+	}
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
 		|| !ft_strncmp(line, "EA ", 3) || !ft_strncmp(line, "WE ", 3)
 		|| !ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))

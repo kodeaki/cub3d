@@ -30,7 +30,7 @@ int	flood_fill(t_game *game)
 
 void	fill(t_game *game, int **visited, int y, int x)
 {
-	if (y < 0 || y > game->map.height || x < 0 || x > game->map.width)
+	if (y < 0 || y >= game->map.height || x < 0 || x >= game->map.width)
 		return ;
 	if (game->map.arr[y][x] == '1')
 		return ;
