@@ -24,9 +24,6 @@ SRC				:=	main.c \
 					minimap/draw_rays.c \
 					player/move_player.c \
 					raycasting/clear_image.c \
-					raycasting/raycast_texture.c \
-					raycasting/texture_color.c \
-					raycasting/texture_cords.c \
 					raycasting/touch.c \
 					parsing/utils.c \
 					parsing/parse_utils.c \

@@ -15,6 +15,14 @@
 
 # include "typedef.h"
 # include <stdbool.h>
+# include <stdint.h>
+
+struct s_rgb
+{
+	int		r;
+	int		g;
+	int		b;
+};
 
 struct s_parser
 {
@@ -24,6 +32,8 @@ struct s_parser
 	int		player_x;
 	int		player_y;
 	int		player_count;
+	t_rgb	f;
+	t_rgb	c;
 };
 
 struct s_check
@@ -34,13 +44,6 @@ struct s_check
 	int	ea;
 	int	c;
 	int	f;
-};
-
-struct s_rgb
-{
-	int		r;
-	int		g;
-	int		b;
 };
 
 struct s_map
@@ -56,17 +59,6 @@ struct s_minimap
 	int	width;
 	int	height;
 	int	cell;
-};
-
-struct s_ray
-{
-    float		x;
-	float		y;
-	float		angle;
-	float		cos_angle;
-	float		sin_angle;
-	float		dist;
-	int			hit;
 };
 
 struct s_player
@@ -117,8 +109,8 @@ struct s_config
 	t_texture	south;
 	t_texture	east;
 	t_texture	west;
-	t_rgb	f;
-	t_rgb	c;
+	uint32_t	floor;
+	uint32_t	ceiling;
 };
 
 struct s_game
@@ -140,7 +132,6 @@ struct s_game
 	t_player	player;
 	t_config	config;
 	t_file		file;
-	t_ray		ray;
 };
 
 #endif
