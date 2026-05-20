@@ -12,8 +12,9 @@
 
 #include "cub3d.h"
 
-static int	validate_format(char *line, t_game *game);
-static int	check_rgb_lens(t_game *game);
+static int		validate_format(char *line, t_game *game);
+static int		check_rgb_len(t_game *game);
+static uint32_t	convert_rgb_to_hex(t_rgb *rgb);
 
 int	set_floor(char *line, t_game *game)
 {
@@ -24,16 +25,17 @@ int	set_floor(char *line, t_game *game)
 	if (validate_format(line, game))
 		return (1);
 	pos = 2;
-	if (check_rgb_lens(game))
+	if (check_rgb_len(game))
 		return (1);
-	if (set_color(&line[pos], &game->config.f.r, game->file.parser.r_len))
+	if (set_color(&line[pos], &game->file.parser.f.r, game->file.parser.r_len))
 		return (1);
 	pos = pos + game->file.parser.r_len + 1;
-	if (set_color(&line[pos], &game->config.f.g, game->file.parser.g_len))
+	if (set_color(&line[pos], &game->file.parser.f.g, game->file.parser.g_len))
 		return (1);
 	pos = pos + game->file.parser.g_len + 1;
-	if (set_color(&line[pos], &game->config.f.b, game->file.parser.b_len))
+	if (set_color(&line[pos], &game->file.parser.f.b, game->file.parser.b_len))
 		return (1);
+	game->config.floor = convert_rgb_to_hex(&game->file.parser.f);
 	return (0);
 }
 
@@ -46,16 +48,17 @@ int	set_ceiling(char *line, t_game *game)
 	if (validate_format(line, game))
 		return (1);
 	pos = 2;
-	if (check_rgb_lens(game))
+	if (check_rgb_len(game))
 		return (1);
-	if (set_color(&line[pos], &game->config.c.r, game->file.parser.r_len))
+	if (set_color(&line[pos], &game->file.parser.c.r, game->file.parser.r_len))
 		return (1);
 	pos = pos + game->file.parser.r_len + 1;
-	if (set_color(&line[pos], &game->config.c.g, game->file.parser.g_len))
+	if (set_color(&line[pos], &game->file.parser.c.g, game->file.parser.g_len))
 		return (1);
 	pos = pos + game->file.parser.g_len + 1;
-	if (set_color(&line[pos], &game->config.c.b, game->file.parser.b_len))
+	if (set_color(&line[pos], &game->file.parser.c.b, game->file.parser.b_len))
 		return (1);
+	game->config.ceiling = convert_rgb_to_hex(&game->file.parser.c);
 	return (0);
 }
 
@@ -84,7 +87,7 @@ static int	validate_format(char *line, t_game *game)
 	return (0);
 }
 
-static int	check_rgb_lens(t_game *game)
+static int	check_rgb_len(t_game *game)
 {
 	if (!game->file.parser.r_len || !game->file.parser.g_len
 		|| !game->file.parser.b_len)
@@ -93,4 +96,16 @@ static int	check_rgb_lens(t_game *game)
 		|| game->file.parser.b_len > 3)
 		return (1);
 	return (0);
+}
+
+static uint32_t	convert_rgb_to_hex(t_rgb *rgb)
+{
+	uint32_t	r;
+	uint32_t	g;
+	uint32_t	b;
+
+	r = (uint32_t)rgb->r;
+	g = (uint32_t)rgb->g;
+	b = (uint32_t)rgb->b;
+	return (r << 16 | g << 8 | b);
 }

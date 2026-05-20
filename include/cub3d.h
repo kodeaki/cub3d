@@ -13,7 +13,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define BLOCK_SIZE 128
+# define BLOCK_SIZE 64
 # define VERTICAL 0
 # define HORIZONTAL 1
 
