@@ -109,14 +109,6 @@ void	clear_image(t_game *game);
 int		game_loop(t_game *game);
 	
 // Raycasting
-float	distance(float x, float y);
-float	fixed_dist(t_ray *ray, float player_angle);
-// void	raycast(t_game *game, t_player *player);
-void	raycast_texture(t_game *game);
-int		get_texture_color(t_game *game, int current_y,
-				int wall_top, float height);
-int		get_texture_x(t_game *game, int orientation);
-int		get_texture_y(int current_y, int wall_top, float height);
 bool	touch(t_game *game, float px, float py);
 
 // Player
