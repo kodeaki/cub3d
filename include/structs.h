@@ -31,6 +31,7 @@ struct s_parser
 	size_t	b_len;
 	int		player_x;
 	int		player_y;
+	float	player_orientation;
 	int		player_count;
 	t_rgb	f;
 	t_rgb	c;
@@ -66,7 +67,8 @@ struct s_player
 	float		x;
 	float		y;
 	float		angle;
-	float		fov;
+	float		fov_degrees;	// Field of view in degrees for readability
+	float		fov;			// Field of view in radians for calculations
 	float		turn_speed;
 	float		move_speed;
 
@@ -109,8 +111,52 @@ struct s_config
 	t_texture	south;
 	t_texture	east;
 	t_texture	west;
+	
 	uint32_t	floor;
 	uint32_t	ceiling;
+};
+
+struct s_camera
+{
+	double	dir_x;
+	double	dir_y;
+	
+	double	plane_x;
+	double	plane_y;
+	
+	double	camera_x;
+	double	camera_step;
+	
+	double	sin_angle;
+	double	cos_angle;
+};
+
+struct s_raycast
+{
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+
+	int		step_x;
+	int		step_y;
+	bool	side;
+	bool	hit;
+
+	double	perp_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+
+	double	wall_u;
+	int		texture_x;
+	double	texture_step;
+	double	texture_pos;
 };
 
 struct s_game
@@ -132,6 +178,9 @@ struct s_game
 	t_player	player;
 	t_config	config;
 	t_file		file;
+
+	t_camera	cam;
+	t_raycast	ray;
 };
 
 #endif

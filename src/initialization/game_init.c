@@ -32,10 +32,11 @@ static void	player_init(t_game *game)
 {
 	game->player.x = game->file.parser.player_x * BLOCK_SIZE;
 	game->player.y = game->file.parser.player_y * BLOCK_SIZE;
-	game->player.angle = 270 * PI / 180;
+	game->player.angle = game->file.parser.player_orientation;
 	game->player.cos_angle = cos(game->player.angle);
 	game->player.sin_angle = sin(game->player.angle);
-	game->player.fov = PI / 2.0f;
+	game->player.fov_degrees = 90;
+	game->player.fov = game->player.fov_degrees * (PI / 180);
 	game->player.move_speed = 1.5f;
 	game->player.turn_speed = 0.03;
 	game->player.key_up = false;
