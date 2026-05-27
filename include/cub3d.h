@@ -27,13 +27,6 @@
 
 # define PI 3.14159265359
 
-enum e_orientation
-{
-	NO,
-	SO,
-	EA,
-	WE,
-};
 
 # include "minilibx-linux/mlx.h"
 # include "libft.h"
@@ -109,10 +102,10 @@ void	clear_image(t_game *game);
 int		game_loop(t_game *game);
 	
 // Raycasting
-bool	touch(t_game *game, float px, float py);
+bool	touch(t_game *game, double px, double py);
 
 // Player
-bool	player_collision(t_game *game, float x, float y);
+bool	player_collision(t_game *game, double x, double y);
 void	move_player(t_player *player, t_game *game);
 
 #endif

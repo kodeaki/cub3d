@@ -47,13 +47,13 @@ int	scan_map(t_game *game)
 void	store_player_orientation(t_game *game, char orientation)
 {
 	if (orientation == 'N')
-		game->file.parser.player_orientation = 3 * PI / 2; // DON'T DELETE THIS COMMENT. double check
-	else if (orientation == 'S')						   // the radian values here and that the player
-		game->file.parser.player_orientation = PI / 2;	   // orientation is correctly set in the map
-	else if (orientation == 'E')						   // Only delete after checking with working raycaster
-		game->file.parser.player_orientation = 0.0f;
+		game->file.parser.orientation = NO;
+	else if (orientation == 'S')
+		game->file.parser.orientation = SO;
+	else if (orientation == 'E')
+		game->file.parser.orientation = EA;
 	else if (orientation == 'W')
-		game->file.parser.player_orientation = PI;
+		game->file.parser.orientation = WE;
 }
 
 int	row_width(t_game *game, const char *row, const int y)
@@ -70,6 +70,7 @@ int	row_width(t_game *game, const char *row, const int y)
 		if (row[i] == 'N' || row[i] == 'S' || row[i] == 'E'
 			|| row[i] == 'W')
 		{
+			store_player_orientation(game, row[i]);
 			game->file.parser.player_x = i;
 			game->file.parser.player_y = y;
 			game->file.parser.player_count++;

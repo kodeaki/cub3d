@@ -12,24 +12,28 @@
 
 #include "cub3d.h"
 
-static void	draw_ray_minimap(t_player *player, t_game *game, float start_x)
+static void	draw_ray_minimap(t_player *player, t_game *game,
+		t_vector ray_dir)
 {
-	float	cos_angle;
-	float	sin_angle;
-	float	ray_x;
-	float	ray_y;
+	double	len;
+	double	ray_x;
+	double	ray_y;
 
-	cos_angle = cos(start_x);
-	sin_angle = sin(start_x);
-	ray_x = player->x;
-	ray_y = player->y;
+	len = sqrt(ray_dir.x * ray_dir.x + ray_dir.y * ray_dir.y);
+	if (len > 0.0)
+	{
+		ray_dir.x /= len;
+		ray_dir.y /= len;
+	}
+	ray_x = player->pos.x;
+	ray_y = player->pos.y;
 	while (!touch(game, ray_x, ray_y))
 	{
 		put_pixel(game, 0xFF0000,
 			(int)((ray_x / BLOCK_SIZE) * game->minimap.cell),
 			(int)((ray_y / BLOCK_SIZE) * game->minimap.cell));
-		ray_x += cos_angle;
-		ray_y += sin_angle;
+		ray_x += ray_dir.x;
+		ray_y += ray_dir.y;
 	}
 }
 
@@ -37,20 +41,23 @@ static void	draw_ray_minimap(t_player *player, t_game *game, float start_x)
 void	draw_rays(t_player *player, t_game *game)
 {
 	int		ray_count;
-	float	step;
-	float	ray_angle;
+	double	step;
+	double	camera_x;
 	int		i;
+	t_vector	ray_dir;
 
 	ray_count = 30;
 	if (ray_count < 2)
 		ray_count = 2;
-	step = player->fov / (ray_count - 1);
-	ray_angle = player->angle - (player->fov / 2.0f);
+	step = 2.0 / (ray_count - 1);
+	camera_x = -1.0;
 	i = 0;
 	while (i < ray_count)
 	{
-		draw_ray_minimap(player, game, ray_angle);
-		ray_angle += step;
+		ray_dir.x = player->dir.x + player->plane.x * camera_x;
+		ray_dir.y = player->dir.y + player->plane.y * camera_x;
+		draw_ray_minimap(player, game, ray_dir);
+		camera_x += step;
 		i++;
 	}
 }

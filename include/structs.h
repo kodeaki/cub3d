@@ -17,6 +17,14 @@
 # include <stdbool.h>
 # include <stdint.h>
 
+enum e_orientation
+{
+	NO,
+	SO,
+	EA,
+	WE,
+};
+
 struct s_rgb
 {
 	int		r;
@@ -26,15 +34,15 @@ struct s_rgb
 
 struct s_parser
 {
-	size_t	r_len;
-	size_t	g_len;
-	size_t	b_len;
-	int		player_x;
-	int		player_y;
-	float	player_orientation;
-	int		player_count;
-	t_rgb	f;
-	t_rgb	c;
+	size_t			r_len;
+	size_t			g_len;
+	size_t			b_len;
+	int				player_x;
+	int				player_y;
+	t_orientation	orientation;
+	int				player_count;
+	t_rgb			f;
+	t_rgb			c;
 };
 
 struct s_check
@@ -60,30 +68,6 @@ struct s_minimap
 	int	width;
 	int	height;
 	int	cell;
-};
-
-struct s_player
-{
-	float		x;
-	float		y;
-	float		angle;
-	float		fov_degrees;	// Field of view in degrees for readability
-	float		fov;			// Field of view in radians for calculations
-	float		turn_speed;
-	float		move_speed;
-
-	float		cos_angle;
-	float		sin_angle;
-	float		move_x;
-	float		move_y;
-
-	bool		key_up;
-	bool		key_down;
-	bool		key_left;
-	bool		key_right;
-	bool		left_rotate;
-	bool		right_rotate;
-
 };
 
 struct s_file
@@ -116,30 +100,50 @@ struct s_config
 	uint32_t	ceiling;
 };
 
+struct s_vector
+{
+	double	x;
+	double	y;
+};
+
+struct s_player
+{
+	t_vector	pos;
+	t_vector	dir;
+	t_vector	plane;
+	
+	double		fov_degrees;	// Field of view in degrees for readability
+	double		fov;			// Field of view in radians for calculations
+	double		turn_speed;
+	double		move_speed;
+
+	double		move_x;
+	double		move_y;
+
+	bool		key_up;
+	bool		key_down;
+	bool		key_left;
+	bool		key_right;
+	bool		left_rotate;
+	bool		right_rotate;
+};
+
 struct s_camera
 {
-	double	dir_x;
-	double	dir_y;
-	
-	double	plane_x;
-	double	plane_y;
-	
 	double	camera_x;
 	double	camera_step;
-	
-	double	sin_angle;
-	double	cos_angle;
 };
 
 struct s_raycast
 {
-	double	ray_dir_x;
-	double	ray_dir_y;
+	t_vector	ray_dir;
+	
 	int		map_x;
 	int		map_y;
 
 	double	sidedist_x;
 	double	sidedist_y;
+	
 	double	deltadist_x;
 	double	deltadist_y;
 

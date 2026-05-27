@@ -3,6 +3,7 @@
 void	ray_camera_setup(t_game *game)
 {
 	// Compute sin and cos from the player angle once per frame.
+	
 	// Build dir_x and dir_y from cos and sin.
 	// Build plane_x and plane_y perpendicular to dir, scaled by FOV.
 	// Set camera_step to 2.0 / window_width for camera space stepping.

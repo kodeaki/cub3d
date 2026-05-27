@@ -19,8 +19,8 @@ void	draw_player(t_game *game, int size, int color)
 	int	i;
 	int	j;
 
-	x = (int)((game->player.x / BLOCK_SIZE) * game->minimap.cell);
-	y = (int)((game->player.y / BLOCK_SIZE) * game->minimap.cell);
+	x = (int)((game->player.pos.x / BLOCK_SIZE) * game->minimap.cell);
+	y = (int)((game->player.pos.y / BLOCK_SIZE) * game->minimap.cell);
 	i = x - size;
 	while (i <= x + size)
 	{
