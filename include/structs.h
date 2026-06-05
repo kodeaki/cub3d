@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 14:56:02 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/06/04 12:25:57 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/06/05 20:34:56 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,6 @@ struct s_player
 	bool		right_rotate;
 };
 
-struct s_camera
-{
-	double	camera_x;
-	double	camera_step;
-};
-
 struct s_raycast
 {
 	t_vector	ray_dir;
@@ -177,8 +171,6 @@ struct s_game
 	t_player	player;
 	t_config	config;
 	t_file		file;
-
-	t_camera	cam;
 	t_raycast	ray;
 };
 

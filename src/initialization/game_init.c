@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:00 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/06/04 13:20:08 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/06/05 20:44:12 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ static void	texture_init(t_game *game, t_texture *texture)
 	}
 	texture->data = mlx_get_data_addr(texture->img, &texture->bpp,
 			&texture->size_line, &texture->endian);
+}
+
+static void	set_camera(t_game *game, double x, double y)
+{
+	game->player.plane.x = x;
+	game->player.plane.y = y;
 }
 
 // Add camera plain perpendicular to direction plane
