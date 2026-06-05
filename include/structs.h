@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 14:56:02 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/05 15:51:58 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/06/04 12:25:57 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,10 @@ struct s_player
 	t_vector	pos;
 	t_vector	dir;
 	t_vector	plane;
-	
-	double		fov_degrees;	// Field of view in degrees for readability
-	double		fov;			// Field of view in radians for calculations
 	double		turn_speed;
 	double		move_speed;
-
 	double		move_x;
 	double		move_y;
-
 	bool		key_up;
 	bool		key_down;
 	bool		key_left;

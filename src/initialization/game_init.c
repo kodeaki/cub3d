@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:00 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/03/31 15:09:32 by tpirinen         ###   ########.fr       */
+/*   Updated: 2026/06/04 13:20:08 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	texture_init(t_game *game, t_texture *texture)
 			&texture->size_line, &texture->endian);
 }
 
+// Add camera plain perpendicular to direction plane
 static void	set_player_direction(t_game *game)
 {
 	if (game->file.parser.orientation == NO)
@@ -52,31 +53,14 @@ static void	set_player_direction(t_game *game)
 	}
 }
 
-static void	set_player_plane(t_game *game)
-{
-	double	plane_len;
-
-	plane_len = tan(game->player.fov / 2);
-	game->player.plane.x = -game->player.dir.y * plane_len;
-	game->player.plane.y = game->player.dir.x * plane_len;
-}
-
 static void	player_init(t_game *game)
 {
-	game->player.pos.x = game->file.parser.player_x * BLOCK_SIZE;
-	game->player.pos.y = game->file.parser.player_y * BLOCK_SIZE;
+	game->player.pos.x = game->file.parser.player_x + 0.5;
+	game->player.pos.y = game->file.parser.player_y + 0.5;
 	set_player_direction(game);
-	game->player.fov_degrees = 90;
-	game->player.fov = game->player.fov_degrees * (PI / 180);
-	set_player_plane(game);
+	// maybe movespeed to gettimeofday implementation
 	game->player.move_speed = 0.5;
-	game->player.turn_speed = 0.01;
-	game->player.key_up = false;
-	game->player.key_down = false;
-	game->player.key_right = false;
-	game->player.key_left = false;
-	game->player.left_rotate = false;
-	game->player.right_rotate = false;
+	game->player.turn_speed = 0.05;
 }
 
 void	game_init(t_game *game)

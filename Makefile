@@ -18,13 +18,7 @@ SRC				:=	main.c \
 					put_pixel.c \
 					key_presses.c \
 					initialization/game_init.c \
-					minimap/draw_map.c \
-					minimap/draw_minimap.c \
-					minimap/draw_player.c \
-					minimap/draw_rays.c \
-					player/move_player.c \
 					raycasting/clear_image.c \
-					raycasting/touch.c \
 					parsing/utils.c \
 					parsing/parse_utils.c \
 					parsing/parsing.c \
@@ -39,6 +33,11 @@ SRC				:=	main.c \
 					parsing/copy_map.c \
 					parsing/flood_fill.c \
 					parsing/flood_utils.c
+					#minimap/draw_map.c \
+					minimap/draw_minimap.c \
+					minimap/draw_player.c \
+					minimap/draw_rays.c \
+					player/move_player.c \
 
 
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRC))

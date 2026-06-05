@@ -6,16 +6,12 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:54 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/05/09 18:19:25 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:19:03 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-
-# define BLOCK_SIZE 64
-# define VERTICAL 0
-# define HORIZONTAL 1
 
 # define W      119
 # define A      97
@@ -24,9 +20,6 @@
 # define LEFT   65361
 # define RIGHT  65363
 # define ESC    65307
-
-# define PI 3.14159265359
-
 
 # include "minilibx-linux/mlx.h"
 # include "libft.h"
