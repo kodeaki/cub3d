@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:59 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/06/05 18:40:55 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/06/08 23:36:38 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 int	game_loop(t_game *game)
 {
 	clear_image(game);
-	//move_player(&game->player, game);
-	// dda
-	// draw_minimap(game);
+	move_player(&game->player, game);
+	cast_rays(game);
 	mlx_put_image_to_window(game->mlx, game->window, game->image, 0, 0);
 	return (0);
 }

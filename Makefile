@@ -33,11 +33,12 @@ SRC				:=	main.c \
 					parsing/copy_map.c \
 					parsing/flood_fill.c \
 					parsing/flood_utils.c
-					#minimap/draw_map.c \
+					player/move_player.c \
+					raycasting/cast_rays.c \
+					# minimap/draw_map.c \
 					minimap/draw_minimap.c \
 					minimap/draw_player.c \
 					minimap/draw_rays.c \
-					player/move_player.c \
 
 
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRC))

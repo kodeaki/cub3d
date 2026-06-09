@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:00 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/06/05 20:44:12 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/06/08 23:28:39 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,30 @@ static void	texture_init(t_game *game, t_texture *texture)
 			&texture->size_line, &texture->endian);
 }
 
-static void	set_camera(t_game *game, double x, double y)
+static void	set_camera(t_game *game)
 {
-	game->player.plane.x = x;
-	game->player.plane.y = y;
+	if (game->file.parser.orientation == NO)
+	{
+		game->player.plane.x = 0.66;
+		game->player.plane.y = 0.0;
+	}
+	else if (game->file.parser.orientation == SO)
+	{
+		game->player.plane.x = -0.66;
+		game->player.plane.y = 0.0;
+	}
+	else if (game->file.parser.orientation == WE)
+	{
+		game->player.plane.x = 0.0;
+		game->player.plane.y = 0.66;
+	}
+	else if (game->file.parser.orientation == EA)
+	{
+		game->player.plane.x = 0.0;
+		game->player.plane.y = -0.66;
+	}
 }
 
-// Add camera plain perpendicular to direction plane
 static void	set_player_direction(t_game *game)
 {
 	if (game->file.parser.orientation == NO)
@@ -64,6 +81,7 @@ static void	player_init(t_game *game)
 	game->player.pos.x = game->file.parser.player_x + 0.5;
 	game->player.pos.y = game->file.parser.player_y + 0.5;
 	set_player_direction(game);
+	set_camera(game);
 	// maybe movespeed to gettimeofday implementation
 	game->player.move_speed = 0.5;
 	game->player.turn_speed = 0.05;
