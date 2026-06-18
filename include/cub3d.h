@@ -95,7 +95,7 @@ void	clear_image(t_game *game);
 int		game_loop(t_game *game);
 	
 // Raycasting
-bool	touch(t_game *game, double px, double py);
+void	raycast(t_game *game);
 
 // Player
 bool	player_collision(t_game *game, double x, double y);

@@ -12,14 +12,16 @@
 
 #include "cub3d.h"
 
-void	cast_rays(t_game *game)
+void	raycast(t_game *game)
 {
 	int	x;
 
-	i = 0;
-	while (i < WIDTH - 1)
+	x = 0;
+	while (x < game->window_width - 1)
 	{
-		i++;
+		ray_init(game, x);
+		ray_dda();
+		x++;
 	}
 }
 
