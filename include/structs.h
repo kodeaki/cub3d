@@ -125,7 +125,7 @@ struct s_player
 
 struct s_raycast
 {
-	t_vector	ray_dir;
+	t_vector	dir;
 	
 	int		map_x;
 	int		map_y;
@@ -145,7 +145,8 @@ struct s_raycast
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-
+	int		screen_x;  // added for testing, remove unless necessary to keep
+	
 	double	wall_u;
 	int		texture_x;
 	double	texture_step;

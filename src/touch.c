@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_player.c                                      :+:      :+:    :+:   */
+/*   put_pixel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:36:38 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/04/01 15:38:37 by tpirinen         ###   ########.fr       */
+/*   Updated: 2026/03/31 14:37:34 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_player(t_game *game, int size, int color)
+bool	touch(t_game *game, double px, double py)
 {
-	int	x;
-	int	y;
-	int	i;
-	int	j;
+	int		map_x;
+	int		map_y;
+	char	cell;
 
-	x = (int)(game->player.pos.x * game->minimap.cell);
-	y = (int)(game->player.pos.y * game->minimap.cell);
-	i = x - size;
-	while (i <= x + size)
-	{
-		j = y - size;
-		while (j <= y + size)
-		{
-			put_pixel(game, color, i, j);
-			j++;
-		}
-		i++;
-	}
+	if (px < 0.0 || py < 0.0)
+		return (true);
+	map_x = (int)px;
+	map_y = (int)py;
+	if (map_y < 0 || map_y >= game->map.height
+		|| map_x < 0 || map_x >= game->map.width)
+		return (true);
+	cell = game->map.arr[map_y][map_x];
+	if (cell == '1' || cell == ' ')
+		return (true);
+	return (false);
 }

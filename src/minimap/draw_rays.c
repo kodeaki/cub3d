@@ -30,8 +30,8 @@ static void	draw_ray_minimap(t_player *player, t_game *game,
 	while (!touch(game, ray_x, ray_y))
 	{
 		put_pixel(game, 0xFF0000,
-			(int)((ray_x / BLOCK_SIZE) * game->minimap.cell),
-			(int)((ray_y / BLOCK_SIZE) * game->minimap.cell));
+			(int)(ray_x * game->minimap.cell),
+			(int)(ray_y * game->minimap.cell));
 		ray_x += ray_dir.x;
 		ray_y += ray_dir.y;
 	}
@@ -40,10 +40,10 @@ static void	draw_ray_minimap(t_player *player, t_game *game,
 // Draws a set amount of rays into players FOV on minimap
 void	draw_rays(t_player *player, t_game *game)
 {
-	int		ray_count;
-	double	step;
-	double	camera_x;
-	int		i;
+	int			ray_count;
+	double		step;
+	double		camera_x;
+	int			i;
 	t_vector	ray_dir;
 
 	ray_count = 30;

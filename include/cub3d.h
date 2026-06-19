@@ -13,6 +13,17 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# define BLOCK_SIZE 64
+
+// Change players field of view. 1° < FOV_DEG < 180°
+# define FOV_DEG 90
+
+// Change players move speed and turn speed
+//  1 - - - - 3 - - - - 5 - - - - - - 10 - - - - - - - 50
+// slow - - fast - - super fast - ultra fast - - uncontrollable
+# define MOVE_SPEED 3
+# define TURN_SPEED 3
+
 # define W      119
 # define A      97
 # define S      115
@@ -29,6 +40,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <sys/time.h>
 
 // Parsing
 int		parsing(int argc, char **argv, t_game *game);
@@ -86,6 +98,7 @@ int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 
 // Drawing / Image output
+bool	touch(t_game *game, double px, double py);
 void	put_pixel(t_game *game, int color, int x, int y);
 void	draw_minimap(t_game *game);
 void	draw_player(t_game *game, int size, int color);
@@ -96,9 +109,13 @@ int		game_loop(t_game *game);
 	
 // Raycasting
 void	raycast(t_game *game);
+void	ray_init(t_game *game, int col);
+void	ray_dda(t_game *game);
+void	test_dda(t_game *game); //test
 
 // Player
 bool	player_collision(t_game *game, double x, double y);
+double	get_delta_seconds(void);
 void	move_player(t_player *player, t_game *game);
 
 #endif

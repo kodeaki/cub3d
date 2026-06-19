@@ -20,12 +20,8 @@ void	raycast(t_game *game)
 	while (x < game->window_width - 1)
 	{
 		ray_init(game, x);
-		ray_dda();
+		ray_dda(game);
+		test_dda(game);
 		x++;
 	}
-}
-
-double	calculate_distance(t_game *game)
-{
-
 }

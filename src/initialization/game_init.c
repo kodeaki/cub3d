@@ -28,28 +28,21 @@ static void	texture_init(t_game *game, t_texture *texture)
 			&texture->size_line, &texture->endian);
 }
 
+/*
+ * set_camera
+ *
+ * Set the camera plane vector from the current player direction.
+ * The plane is perpendicular to the direction vector and its length
+ * is determined by the horizontal field of view (FOV). Higher FOV value
+ * makes the camera plane length longer, giving a wider field of view.
+ */
 static void	set_camera(t_game *game)
 {
-	if (game->file.parser.orientation == NO)
-	{
-		game->player.plane.x = 0.66;
-		game->player.plane.y = 0.0;
-	}
-	else if (game->file.parser.orientation == SO)
-	{
-		game->player.plane.x = -0.66;
-		game->player.plane.y = 0.0;
-	}
-	else if (game->file.parser.orientation == WE)
-	{
-		game->player.plane.x = 0.0;
-		game->player.plane.y = 0.66;
-	}
-	else if (game->file.parser.orientation == EA)
-	{
-		game->player.plane.x = 0.0;
-		game->player.plane.y = -0.66;
-	}
+	double	plane_len;
+
+	plane_len = tan((FOV_DEG * M_PI / 180.0) * 0.5);
+	game->player.plane.x = -game->player.dir.y * plane_len;
+	game->player.plane.y = game->player.dir.x * plane_len;
 }
 
 static void	set_player_direction(t_game *game)
@@ -82,9 +75,8 @@ static void	player_init(t_game *game)
 	game->player.pos.y = game->file.parser.player_y + 0.5;
 	set_player_direction(game);
 	set_camera(game);
-	// maybe movespeed to gettimeofday implementation
-	game->player.move_speed = 0.5;
-	game->player.turn_speed = 0.05;
+	game->player.move_speed = MOVE_SPEED;
+	game->player.turn_speed = TURN_SPEED;
 }
 
 void	game_init(t_game *game)

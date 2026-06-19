@@ -17,7 +17,7 @@ bool	player_collision(t_game *game, double x, double y)
 	return (touch(game, x, y));
 }
 
-static void	rotate_player(t_player *player)
+static void	rotate_player(t_player *player, double dt)
 {
 	double	rotation;
 	double	cos_a;
@@ -27,7 +27,7 @@ static void	rotate_player(t_player *player)
 
 	if (player->left_rotate == player->right_rotate)
 		return ;
-	rotation = player->turn_speed;
+	rotation = player->turn_speed * dt;
 	if (player->left_rotate)
 		rotation = -rotation;
 	cos_a = cos(rotation);
@@ -69,7 +69,7 @@ static void	calculate_movement(t_player *player)
 	}
 }
 
-static void	apply_movement(t_player *player, t_game *game)
+static void	apply_movement(t_player *player, t_game *game, double dt)
 {
 	double	move_len;
 	double	new_x;
@@ -77,12 +77,12 @@ static void	apply_movement(t_player *player, t_game *game)
 
 	move_len = sqrt(player->move_x * player->move_x
 			+ player->move_y * player->move_y);
-	if (move_len <= 0)
+	if (move_len <= 0.0)
 		return ;
 	player->move_x /= move_len;
 	player->move_y /= move_len;
-	new_x = player->pos.x + player->move_x * player->move_speed;
-	new_y = player->pos.y + player->move_y * player->move_speed;
+	new_x = player->pos.x + player->move_x * player->move_speed * dt;
+	new_y = player->pos.y + player->move_y * player->move_speed * dt;
 	if (!player_collision(game, new_x, player->pos.y))
 		player->pos.x = new_x;
 	if (!player_collision(game, player->pos.x, new_y))
@@ -91,9 +91,12 @@ static void	apply_movement(t_player *player, t_game *game)
 
 void	move_player(t_player *player, t_game *game)
 {
-	player->move_x = 0;
-	player->move_y = 0;
-	rotate_player(player);
+	double	dt;
+
+	player->move_x = 0.0;
+	player->move_y = 0.0;
+	dt = get_delta_seconds();
+	rotate_player(player, dt);
 	calculate_movement(player);
-	apply_movement(player, game);
+	apply_movement(player, game, dt);
 }

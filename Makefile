@@ -17,6 +17,7 @@ OBJ_DIR 		:=	obj
 SRC				:=	main.c \
 					put_pixel.c \
 					key_presses.c \
+					touch.c \
 					initialization/game_init.c \
 					raycasting/clear_image.c \
 					parsing/utils.c \
@@ -32,13 +33,17 @@ SRC				:=	main.c \
 					parsing/parse_map.c \
 					parsing/copy_map.c \
 					parsing/flood_fill.c \
-					parsing/flood_utils.c
+					parsing/flood_utils.c \
 					player/move_player.c \
-					raycasting/cast_rays.c \
-					# minimap/draw_map.c \
+					player/get_delta_seconds.c \
+					raycasting/raycast.c \
+					raycasting/ray_init.c \
+					raycasting/ray_dda.c \
+					minimap/draw_map.c \
 					minimap/draw_minimap.c \
 					minimap/draw_player.c \
 					minimap/draw_rays.c \
+					raycasting/testdda.c \
 
 
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRC))
