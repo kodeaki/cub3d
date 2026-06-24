@@ -14,10 +14,8 @@
 
 static void	texture_init(t_game *game, t_texture *texture)
 {
-	int	w;
-	int	h;
-
-	texture->img = mlx_xpm_file_to_image(game->mlx, texture->path, &w, &h);
+	texture->img = mlx_xpm_file_to_image(game->mlx, texture->path,
+			&texture->width, &texture->height);
 	if (texture->img == NULL)
 	{
 		printf("Error: Failed to load texture %s\n", texture->path);

@@ -6,7 +6,7 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 23:39:23 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/06/09 01:39:16 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/06/24 19:24:16 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	raycast(t_game *game)
 	{
 		ray_init(game, x);
 		ray_dda(game);
-		test_dda(game);
+		texture_setup(game);
+		draw_column(game);
 		x++;
 	}
 }

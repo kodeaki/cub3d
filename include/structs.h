@@ -25,6 +25,12 @@ enum e_orientation
 	WE,
 };
 
+enum e_side
+{
+	X_SIDE,
+	Y_SIDE
+};
+
 struct s_rgb
 {
 	int		r;
@@ -81,12 +87,14 @@ struct s_file
 
 struct s_texture
 {
-	int			bpp;
-	int			size_line;
-	int			endian;
-	void		*img;
-	char		*data;
-	char		*path;
+	int		width;
+	int		height;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	void	*img;
+	char	*data;
+	char	*path;
 };
 
 struct s_config
@@ -111,14 +119,18 @@ struct s_player
 	t_vector	pos;
 	t_vector	dir;
 	t_vector	plane;
+	
 	double		turn_speed;
 	double		move_speed;
+	
 	double		move_x;
 	double		move_y;
+	
 	bool		key_up;
 	bool		key_down;
 	bool		key_left;
 	bool		key_right;
+	
 	bool		left_rotate;
 	bool		right_rotate;
 };
@@ -145,12 +157,11 @@ struct s_raycast
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	int		screen_x;  // added for testing, remove unless necessary to keep
 	
-	double	wall_u;
+	double	texture_u;
 	int		texture_x;
+	int		screen_x;
 	double	texture_step;
-	double	texture_pos;
 };
 
 struct s_game

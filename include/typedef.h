@@ -14,6 +14,7 @@
 # define TYPEDEF_H
 
 typedef enum e_orientation	t_orientation;
+typedef enum e_side			t_side;
 typedef struct s_parser		t_parser;
 typedef struct s_file		t_file;
 typedef struct s_check		t_check;

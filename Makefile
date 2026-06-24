@@ -39,11 +39,13 @@ SRC				:=	main.c \
 					raycasting/raycast.c \
 					raycasting/ray_init.c \
 					raycasting/ray_dda.c \
+					raycasting/texture_setup.c \
+					raycasting/get_wall_texture.c \
+					raycasting/draw_column.c \
 					minimap/draw_map.c \
 					minimap/draw_minimap.c \
 					minimap/draw_player.c \
 					minimap/draw_rays.c \
-					raycasting/testdda.c \
 
 
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRC))

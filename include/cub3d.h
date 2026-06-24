@@ -13,8 +13,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define BLOCK_SIZE 64
-
 // Change players field of view. 1° < FOV_DEG < 180°
 # define FOV_DEG 90
 
@@ -108,10 +106,12 @@ void	clear_image(t_game *game);
 int		game_loop(t_game *game);
 	
 // Raycasting
-void	raycast(t_game *game);
-void	ray_init(t_game *game, int col);
-void	ray_dda(t_game *game);
-void	test_dda(t_game *game); //test
+void		raycast(t_game *game);
+void		ray_init(t_game *game, int col);
+void		ray_dda(t_game *game);
+void		texture_setup(t_game *game);
+t_texture	*get_wall_texture(t_game *game);
+void		draw_column(t_game *game);
 
 // Player
 bool	player_collision(t_game *game, double x, double y);

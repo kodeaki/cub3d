@@ -20,13 +20,13 @@ void	ray_dda(t_game *game)
 		{
 			game->ray.sidedist_x += game->ray.deltadist_x;
 			game->ray.map_x += game->ray.step_x;
-			game->ray.side = false;
+			game->ray.side = X_SIDE;
 		}
 		else
 		{
 			game->ray.sidedist_y += game->ray.deltadist_y;
 			game->ray.map_y += game->ray.step_y;
-			game->ray.side = true;
+			game->ray.side = Y_SIDE;
 		}
 		if (game->ray.map_x < 0 || game->ray.map_y < 0
 			|| game->ray.map_x >= game->map.width
