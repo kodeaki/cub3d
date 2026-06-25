@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 // Change players field of view. 1° < FOV_DEG < 180°
-# define FOV_DEG 90
+# define FOV_DEG 70
 
 // Change players move speed and turn speed
 //  1 - - - - 3 - - - - 5 - - - - - - 10 - - - - - - - 50
