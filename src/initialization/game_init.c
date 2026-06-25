@@ -84,8 +84,8 @@ void	game_init(t_game *game)
 
 	game->mlx = mlx_init();
 	mlx_get_screen_size(game->mlx, &screen_width, &screen_height);
-	game->window_width = screen_width;
-	game->window_height = screen_height;
+	game->window_width = screen_width * 0.7;
+	game->window_height = screen_height * 0.6;
 	player_init(game);
 	game->window = mlx_new_window(game->mlx, game->window_width,
 			game->window_height, "cub3d");

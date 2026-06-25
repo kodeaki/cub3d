@@ -43,7 +43,7 @@ static uint32_t	get_texture_pixel(t_texture *texture, int x, int y)
 	return (color);
 }
 
-void	draw_column(t_game *game)
+void	draw_column(t_game *game, uint32_t *data)
 {
 	t_texture	*texture;
 	int			draw_y;
@@ -58,7 +58,7 @@ void	draw_column(t_game *game)
 	{
 		texture_y = (int)texture_v;
 		color = get_texture_pixel(texture, game->ray.texture_x, texture_y);
-		put_pixel(game, color, game->ray.screen_x, draw_y);
+		data[(int)(draw_y * game->window_width + game->ray.screen_x)] = color;
 		texture_v += game->ray.texture_step;
 		draw_y++;
 	}

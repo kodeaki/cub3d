@@ -111,7 +111,7 @@ void		ray_init(t_game *game, int col);
 void		ray_dda(t_game *game);
 void		texture_setup(t_game *game);
 t_texture	*get_wall_texture(t_game *game);
-void		draw_column(t_game *game);
+void		draw_column(t_game *game, uint32_t *data);
 
 // Player
 bool	player_collision(t_game *game, double x, double y);

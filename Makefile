@@ -15,7 +15,6 @@ SRC_DIR 		:=	src
 OBJ_DIR 		:=	obj
 
 SRC				:=	main.c \
-					put_pixel.c \
 					key_presses.c \
 					touch.c \
 					initialization/game_init.c \
@@ -46,6 +45,7 @@ SRC				:=	main.c \
 					minimap/draw_minimap.c \
 					minimap/draw_player.c \
 					minimap/draw_rays.c \
+					minimap/put_pixel.c
 
 
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRC))
