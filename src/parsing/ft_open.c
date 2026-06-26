@@ -28,7 +28,7 @@ int	open_file(int argc, char **argv, t_game *game)
 		return (ft_close(fd, 1));
 	if (ft_check(game))
 		return (ft_close(fd, 1));
-	return (0);
+	return (ft_close(fd, 0));
 }
 
 int	parse_file(int fd, t_game *game)

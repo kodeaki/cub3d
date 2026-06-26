@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:54 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/06/03 14:19:03 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/06/26 13:38:27 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	fill(t_game *game, int **visited, int y, int x);
 int		compare(t_game *game, char **map, int **visited);
 int		allocate_visited(t_game *game);
 int		free_mlx(t_game *game);
+int		no_trailing_content(char *str);
 
 // Initialization
 void	game_init(t_game *game);

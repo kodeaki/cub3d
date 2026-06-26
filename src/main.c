@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 
 	ft_bzero(&game, sizeof(game));
 	if (parsing(argc, argv, &game))
-		ft_exit(1, "Usage: ./cub3d /path_to_file.cub");
+		ft_exit(1, "Map file not ok");
 	game_init(&game);
 	mlx_hook(game.window, 2, 1L << 0, key_press, &game);
 	mlx_hook(game.window, 3, 1L << 1, key_release, &game);

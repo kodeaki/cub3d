@@ -25,7 +25,7 @@ int	set_height(t_game *game)
 
 void	ft_exit(int err, const char *msg)
 {
-	printf("Error.\n");
+	printf("Error\n");
 	printf("%s\n", msg);
 	exit(err);
 }

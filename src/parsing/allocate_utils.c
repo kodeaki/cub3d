@@ -6,22 +6,37 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 01:39:49 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/03 22:55:59 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/06/26 13:38:27 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	no_trailing_content(char *str)
+{
+	while (*str)
+	{
+		if (!ft_space(*str))
+			return (1);
+		str++;
+	}
+	return (0);
+}
+
 size_t	check_line(char *line, int mod)
 {
 	size_t	i;
+	size_t	j;
 	size_t	k;
 
 	if (!mod)
 		i = 3;
 	else
 		i = 2;
-	if (!line[i] || ft_space(line[i]))
+	while (line[i] && ft_space(line[i]) && line[i] != '\n')
+		i++;
+	j = i;
+	if (!line[i] || line[i] == '\n')
 		return (0);
 	while (line[i] && !ft_space(line[i]))
 		i++;
@@ -30,7 +45,7 @@ size_t	check_line(char *line, int mod)
 		k++;
 	if (line[k] && !ft_space(line[k]))
 		return (0);
-	return (i - 3);
+	return (i - j);
 }
 
 int	ft_space(char c)
