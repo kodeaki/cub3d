@@ -31,7 +31,10 @@ int	flood_fill(t_game *game)
 void	fill(t_game *game, int **visited, int y, int x)
 {
 	if (y < 0 || y >= game->map.height || x < 0 || x >= game->map.width)
+	{
+		game->file.parser.out_of_bounds = 1;
 		return ;
+	}
 	if (game->map.arr[y][x] == '1')
 		return ;
 	if (visited[y][x] == 1)
@@ -54,6 +57,8 @@ int	compare(t_game *game, char **map, int **visited)
 	int	j;
 
 	i = 0;
+	if (game->file.parser.out_of_bounds)
+		return (1);
 	while (i < game->map.height)
 	{
 		j = 0;

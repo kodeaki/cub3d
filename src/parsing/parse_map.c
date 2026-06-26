@@ -27,13 +27,15 @@ int	scan_map(t_game *game)
 {
 	int	i;
 	int	longest_row;
+	int	w;
 
 	i = 0;
 	longest_row = 0;
 	while (game->file.raw_map[i])
 	{
-		if (longest_row < row_width(game, game->file.raw_map[i], i))
-			longest_row = row_width(game, game->file.raw_map[i], i);
+		w = row_width(game, game->file.raw_map[i], i);
+		if (longest_row < w)
+			longest_row = w;
 		i++;
 	}
 	if (longest_row < 3)
