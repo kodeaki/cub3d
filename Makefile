@@ -32,7 +32,6 @@ SRC				:=	main.c \
 					parsing/parse_map.c \
 					parsing/copy_map.c \
 					parsing/flood_fill.c \
-					parsing/flood_utils.c \
 					player/move_player.c \
 					player/get_delta_seconds.c \
 					raycasting/raycast.c \

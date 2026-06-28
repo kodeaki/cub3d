@@ -12,18 +12,14 @@
 
 #include "cub3d.h"
 
-int	parse_map(t_game *game)
+void	parse_map(t_game *game)
 {
-	if (scan_map(game))
-		return (ft_free(game), 1);
-	if (copy_map(game))
-		return (ft_free(game), 1);
-	if (flood_fill(game))
-		return (1);
-	return (0);
+	scan_map(game);
+	copy_map(game);
+	flood_fill(game);
 }
 
-int	scan_map(t_game *game)
+void	scan_map(t_game *game)
 {
 	int	i;
 	int	longest_row;
@@ -39,11 +35,10 @@ int	scan_map(t_game *game)
 		i++;
 	}
 	if (longest_row < 3)
-		return (1);
+		ft_exit(game, ERR_NARROW_MAP);
 	if (game->file.parser.player_count != 1)
-		return (1);
+		ft_exit(game, ERR_PLAYER_COUNT);
 	game->map.width = longest_row;
-	return (0);
 }
 
 void	store_player_orientation(t_game *game, char orientation)

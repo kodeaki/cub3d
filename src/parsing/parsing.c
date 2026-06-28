@@ -12,15 +12,10 @@
 
 #include "cub3d.h"
 
-int	parsing(int argc, char **argv, t_game *game)
+void	parsing(int argc, char **argv, t_game *game)
 {
-	if (open_file(argc, argv, game))
-		return (1);
-	if (set_height(game))
-		return (1);
-	if (copy_file(argv, game))
-		return (1);
-	if (parse_map(game))
-		return (1);
-	return (0);
+	open_file(argc, argv, game);
+	set_height(game);
+	copy_file(argv, game);
+	parse_map(game);
 }

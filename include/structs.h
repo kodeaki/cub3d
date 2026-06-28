@@ -49,7 +49,7 @@ struct s_parser
 	int				player_count;
 	t_rgb			f;
 	t_rgb			c;
-	int				out_of_bounds;
+	bool			out_of_bounds;
 };
 
 struct s_check

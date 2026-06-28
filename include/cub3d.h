@@ -16,19 +16,11 @@
 // Change players field of view. 1° < FOV_DEG < 180°
 # define FOV_DEG 70
 
-// Change players move speed and turn speed
-//  1 - - - - 3 - - - - 5 - - - - - - 10 - - - - - - - 50
+// Change players movement speed and turn speed
+//  1 - - - - 3 - - - - - 5 - - - - - 10 - - - - - - - 50
 // slow - - fast - - super fast - ultra fast - - uncontrollable
 # define MOVE_SPEED 3
 # define TURN_SPEED 3
-
-# define W      119
-# define A      97
-# define S      115
-# define D      100
-# define LEFT   65361
-# define RIGHT  65363
-# define ESC    65307
 
 # include "minilibx-linux/mlx.h"
 # include "libft.h"
@@ -40,15 +32,39 @@
 # include <errno.h>
 # include <sys/time.h>
 
+// keycodes used by mlx
+# define W      119
+# define A      97
+# define S      115
+# define D      100
+# define LEFT   65361
+# define RIGHT  65363
+# define ESC    65307
+
+// Error messages
+# define ERR_ARGC "Invalid number of arguments"
+# define ERR_FILE_NAME_EMPTY "Invalid filename: empty"
+# define ERR_FILE_NAME_EXTENSION "Invalid filename: must end with .cub"
+# define ERR_FILE_OPEN "Failed to open file"
+# define ERR_FILE_EMPTY "Map file is empty"
+# define ERR_FILE_INVALID_LINE "Invalid line in map file"
+# define ERR_FILE_INVALID_MAP "Invalid map: not enough rows"
+# define ERR_MEMORY_ALLOC "Memory allocation failed"
+# define ERR_FILE_ELEMENTS "Failed to parse file elements"
+# define ERR_NARROW_MAP "Map is too narrow"
+# define ERR_PLAYER_COUNT "Invalid player count"
+# define ERR_MAP_NOT_ENCLOSED "Map is not enclosed"
+
+
+
 // Parsing
-int			parsing(int argc, char **argv, t_game *game);
-int			open_file(int argc, char **argv, t_game *game);
-int			copy_file(char **argv, t_game *game);
+void		parsing(int argc, char **argv, t_game *game);
+void		open_file(int argc, char **argv, t_game *game);
+void		copy_file(char **argv, t_game *game);
 int			check_extension(char *file);
 int			parse_file(int fd, t_game *game);
 int			process_line(t_game *game, char *line, int i);
 int			ft_strset(const char *str, const char *set);
-int			ft_close(int fd, int ret);
 int			add_check(t_game *game, char *line);
 int			ft_check(t_game *game);
 int			empty_row(char *line);
@@ -56,9 +72,9 @@ int			get_elements(int fd, t_game *game);
 int			loading(int fd, volatile int *i, char **line, t_game *game);
 int			load_line(char *line, t_game *game);
 int			loading_map(int fd, char **line, t_game *game);
-int			set_height(t_game *game);
+void		set_height(t_game *game);
 void		ft_free(t_game *game);
-void		ft_exit(int err, const char *msg);
+void		ft_exit(t_game *game, const char *msg);
 int			allocate_no(char *line, t_game *game);
 int			allocate_so(char *line, t_game *game);
 int			allocate_ea(char *line, t_game *game);
@@ -70,19 +86,19 @@ int			ft_space(char c);
 void		free_map(char **map);
 int			set_color(char *line, int *color, size_t len);
 int			safe_atoi(const char *str, int *err);
-int			parse_map(t_game *game);
+void		parse_map(t_game *game);
 int			find_width(t_game *game);
 void		print_parser(t_game *game);
-int			scan_map(t_game *game);
+void		scan_map(t_game *game);
 int			row_width(t_game *game, const char *row, const int y);
-int			copy_map(t_game *game);
+void		copy_map(t_game *game);
 void		free_mapc(void **map, int i);
-int			copy_row(t_game *game, int row);
+void		copy_row(t_game *game, int row);
 void		print_map(char **map);
-int			flood_fill(t_game *game);
+void		flood_fill(t_game *game);
 void		fill(t_game *game, int **visited, int y, int x);
 int			compare(t_game *game, char **map, int **visited);
-int			allocate_visited(t_game *game);
+void		allocate_visited(t_game *game);
 int			free_mlx(t_game *game);
 int			no_trailing_content(char *str);
 
