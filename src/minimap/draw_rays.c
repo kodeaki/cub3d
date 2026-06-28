@@ -32,8 +32,8 @@ static void	draw_ray_minimap(t_player *player, t_game *game,
 		put_pixel(game, 0xFF0000,
 			(int)(ray_x * game->minimap.cell),
 			(int)(ray_y * game->minimap.cell));
-		ray_x += ray_dir.x;
-		ray_y += ray_dir.y;
+		ray_x += ray_dir.x * 0.1;
+		ray_y += ray_dir.y * 0.1;
 	}
 }
 
@@ -46,7 +46,7 @@ void	draw_rays(t_player *player, t_game *game)
 	int			i;
 	t_vector	ray_dir;
 
-	ray_count = 30;
+	ray_count = 50;
 	if (ray_count < 2)
 		ray_count = 2;
 	step = 2.0 / (ray_count - 1);

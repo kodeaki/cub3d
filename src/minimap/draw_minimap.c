@@ -35,7 +35,17 @@ static void	draw_minimap_background(t_game *game)
 // Clears minimap with a black rectangle, draws rays, player, and map
 void	draw_minimap(t_game *game)
 {
-	game->minimap.cell = (int)(game->window_width / 4) / game->map.width;
+	int	cell_w;
+	int	cell_h;
+
+	cell_w = (game->window_width / 3) / game->map.width;
+	cell_h = (game->window_height / 3) / game->map.height;
+	if (cell_w < cell_h)
+		game->minimap.cell = cell_w;
+	else
+		game->minimap.cell = cell_h / 2;
+	if (game->minimap.cell < 1)
+		game->minimap.cell = 1;
 	draw_minimap_background(game);
 	draw_rays(&game->player, game);
 	draw_player(game, game->minimap.cell / 4, 0x00FF00);
