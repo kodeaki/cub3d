@@ -22,6 +22,10 @@
 # define MOVE_SPEED 3
 # define TURN_SPEED 3
 
+// Window size fractions scaling the window size to the screen size 0.1 - 1.0
+# define WINDOW_WIDTH_FRACTION 0.9
+# define WINDOW_HEIGHT_FRACTION 0.9
+
 # include "minilibx-linux/mlx.h"
 # include "libft.h"
 # include "structs.h"

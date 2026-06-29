@@ -3,7 +3,7 @@ SO assets/textures/south.xpm
 WE assets/textures/west.xpm
 EA assets/textures/east.xpm
 
-F 100,100,100
+F 10,100,20
 C 0,200,255
 
 
