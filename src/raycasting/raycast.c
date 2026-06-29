@@ -15,16 +15,16 @@
 void	raycast(t_game *game)
 {
 	uint32_t	*data;
-	int			x;
+	int			col;
 
 	data = (uint32_t *)game->data;
-	x = 0;
-	while (x < game->window_width - 1)
+	col = 0;
+	while (col < game->window_width - 1)
 	{
-		ray_init(game, x);
+		ray_init(game, col);
 		ray_dda(game);
 		texture_setup(game);
 		draw_column(game, data);
-		x++;
+		col++;
 	}
 }
