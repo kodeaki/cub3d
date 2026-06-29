@@ -24,7 +24,7 @@ void	raycast(t_game *game)
 		ray_init(game, col);
 		ray_dda(game);
 		texture_setup(game);
-		draw_column(game, data);
+		draw_column(game, data, col);
 		col++;
 	}
 }

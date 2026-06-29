@@ -161,7 +161,6 @@ struct s_raycast
 
 	double		texture_u;
 	int			texture_x;
-	int			screen_x;
 	double		texture_step;
 };
 

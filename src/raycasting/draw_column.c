@@ -43,11 +43,18 @@ static uint32_t	get_texture_pixel(t_texture *texture, int x, int y)
 	return (color);
 }
 
-void	draw_column(t_game *game, uint32_t *data)
+/* 
+ * 't_texture' is the current N, S, E, W texture being drawn
+ * 'texture_v' gets incremented by 'texture_step' to keep the
+ * proportions of the texture correct. Passing 'texture_v' to
+ * get_texture_pixel() as an integer gets the correct index of
+ * the pixel from the texture. ie. 'texture_v' = 3.23, 
+ * (int)texture_v = 3, so the 4th pixel from the top is retrieved.
+ */
+void	draw_column(t_game *game, uint32_t *data, int col)
 {
 	t_texture	*texture;
 	int			draw_y;
-	int			texture_y;
 	double		texture_v;
 	uint32_t	color;
 
@@ -56,9 +63,8 @@ void	draw_column(t_game *game, uint32_t *data)
 	draw_y = game->ray.draw_start;
 	while (draw_y < game->ray.draw_end)
 	{
-		texture_y = (int)texture_v;
-		color = get_texture_pixel(texture, game->ray.texture_x, texture_y);
-		data[(int)(draw_y * game->window_width + game->ray.screen_x)] = color;
+		color = get_texture_pixel(texture, game->ray.texture_x, (int)texture_v);
+		data[(int)(draw_y * game->window_width + col)] = color;
 		texture_v += game->ray.texture_step;
 		draw_y++;
 	}

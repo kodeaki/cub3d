@@ -59,9 +59,7 @@
 # define ERR_PLAYER_COUNT "Invalid player count"
 # define ERR_MAP_NOT_ENCLOSED "Map is not enclosed"
 
-
-
-// Parsing
+// --- Parsing ---
 void		parsing(int argc, char **argv, t_game *game);
 void		open_file(int argc, char **argv, t_game *game);
 void		copy_file(char **argv, t_game *game);
@@ -77,17 +75,17 @@ int			loading(int fd, volatile int *i, char **line, t_game *game);
 int			load_line(char *line, t_game *game);
 int			loading_map(int fd, char **line, t_game *game);
 void		set_height(t_game *game);
-void		ft_free(t_game *game);
-void		ft_exit(t_game *game, const char *msg);
+
 int			allocate_no(char *line, t_game *game);
 int			allocate_so(char *line, t_game *game);
 int			allocate_ea(char *line, t_game *game);
 int			allocate_we(char *line, t_game *game);
+
 int			set_floor(char *line, t_game *game);
 int			set_ceiling(char *line, t_game *game);
+
 size_t		check_line(char *line, int mod);
 int			ft_space(char c);
-void		free_map(char **map);
 int			set_color(char *line, int *color, size_t len);
 int			safe_atoi(const char *str, int *err);
 void		parse_map(t_game *game);
@@ -96,47 +94,48 @@ void		print_parser(t_game *game);
 void		scan_map(t_game *game);
 int			row_width(t_game *game, const char *row, const int y);
 void		copy_map(t_game *game);
-void		free_mapc(void **map, int i);
 void		copy_row(t_game *game, int row);
 void		print_map(char **map);
+
 void		flood_fill(t_game *game);
 void		fill(t_game *game, int **visited, int y, int x);
 int			compare(t_game *game, char **map, int **visited);
 void		allocate_visited(t_game *game);
-int			free_mlx(t_game *game);
 int			no_trailing_content(char *str);
 
-// Initialization
+// --- Initialization & Cleanup ---
 void		game_init(t_game *game);
+void		ft_free(t_game *game);
+void		ft_exit(t_game *game, const char *msg);
+int			free_mlx(t_game *game);
+void		free_map(char **map);
+void		free_mapc(void **map, int i);
 
-// Parsing / Map
-void		create_map(t_game *game);
-
-// Key presses
+// --- Key presses ---
 int			key_press(int keycode, t_game *game);
 int			key_release(int keycode, t_game *game);
 
-// Drawing / Image output
-bool		touch(t_game *game, double px, double py);
-void		put_pixel(t_game *game, int color, int x, int y);
-void		draw_minimap(t_game *game);
-void		draw_player(t_game *game, int size, int color);
-void		draw_rays(t_player *player, t_game *game);
-void		draw_map(t_game *game);
-void		clear_image(t_game *game);
-int			game_loop(t_game *game);
+// --- Player ---
+void		move_player(t_player *player, t_game *game);
+bool		player_collision(t_game *game, double x, double y);
+double		get_delta_seconds(void);
 
-// Raycasting
+// --- Raycasting ---
 void		raycast(t_game *game);
 void		ray_init(t_game *game, int col);
 void		ray_dda(t_game *game);
 void		texture_setup(t_game *game);
 t_texture	*get_wall_texture(t_game *game);
-void		draw_column(t_game *game, uint32_t *data);
+void		draw_column(t_game *game, uint32_t *data, int col);
 
-// Player
-bool		player_collision(t_game *game, double x, double y);
-double		get_delta_seconds(void);
-void		move_player(t_player *player, t_game *game);
+// --- Drawing / Image output ---
+bool		touch(t_game *game, double px, double py);
+void		put_pixel(t_game *game, int color, int x, int y);
+void		clear_image(t_game *game);
+void		draw_minimap(t_game *game);
+void		draw_player(t_game *game, int size, int color);
+void		draw_rays(t_player *player, t_game *game);
+void		draw_map(t_game *game);
+int			game_loop(t_game *game);
 
 #endif
