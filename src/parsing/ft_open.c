@@ -75,7 +75,7 @@ int	process_line(t_game *game, char *line, int i)
 		|| !ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
 		return (add_check(game, line), 0);
 	else
-	
+		ft_exit(game, ERR_FILE_INVALID_LINE);
 	if (game->file.map_start && empty_row(line))
 		return (1);
 	if (empty_row(line))

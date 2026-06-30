@@ -59,6 +59,7 @@
 # define ERR_PLAYER_COUNT "Invalid player count"
 # define ERR_MAP_NOT_ENCLOSED "Map is not enclosed"
 
+
 // --- Parsing ---
 void		parsing(int argc, char **argv, t_game *game);
 void		open_file(int argc, char **argv, t_game *game);
