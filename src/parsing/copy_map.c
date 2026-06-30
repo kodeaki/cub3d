@@ -53,15 +53,3 @@ void	copy_row(t_game *game, int row)
 	}
 	game->map.arr[row][i] = '\0';
 }
-
-void	print_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
-}

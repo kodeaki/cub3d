@@ -95,7 +95,6 @@ void		scan_map(t_game *game);
 int			row_width(t_game *game, const char *row, const int y);
 void		copy_map(t_game *game);
 void		copy_row(t_game *game, int row);
-void		print_map(char **map);
 
 void		flood_fill(t_game *game);
 void		fill(t_game *game, int **visited, int y, int x);
