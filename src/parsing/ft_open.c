@@ -12,23 +12,26 @@
 
 #include "cub3d.h"
 
-int	open_file(int argc, char **argv, t_game *game)
+void	open_file(int argc, char **argv, t_game *game)
 {
 	int	fd;
 
-	if (argc != 2 || !argv[1][0])
-		return (1);
+	if (argc != 2)
+		ft_exit(game, ERR_ARGC);
+	if (!argv[1][0])
+		ft_exit(game, ERR_FILE_NAME_EMPTY);
 	if (check_extension(argv[1]))
-		return (1);
+		ft_exit(game, ERR_FILE_NAME_EXTENSION);
 	fd = open(argv[1], O_RDONLY, 0);
 	if (fd < 0)
-		return (ft_close(fd, 1));
+		ft_exit(game, ERR_FILE_OPEN);
 	game->file.line_count = parse_file(fd, game);
-	if (!game->file.line_count)
-		return (ft_close(fd, 1));
 	if (ft_check(game))
-		return (ft_close(fd, 1));
-	return (0);
+	{
+		close(fd);
+		ft_exit(game, ERR_FILE_INVALID_LINE);
+	}
+	close(fd);
 }
 
 int	parse_file(int fd, t_game *game)
@@ -39,17 +42,18 @@ int	parse_file(int fd, t_game *game)
 	line = get_next_line(fd);
 	i = 0;
 	if (!line)
-		return (0);
+		ft_exit(game, ERR_FILE_EMPTY);
 	while (line)
 	{
 		if (process_line(game, line, i))
-			return (free(line), 0);
+		{
+			free(line);
+			ft_exit(game, ERR_FILE_INVALID_LINE);
+		}
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
-	if (line)
-		free(line);
 	return (i);
 }
 
@@ -69,10 +73,9 @@ int	process_line(t_game *game, char *line, int i)
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
 		|| !ft_strncmp(line, "EA ", 3) || !ft_strncmp(line, "WE ", 3)
 		|| !ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
-	{
-		add_check(game, line);
-		return (0);
-	}
+		return (add_check(game, line), 0);
+	else
+		ft_exit(game, ERR_FILE_INVALID_LINE);
 	if (game->file.map_start && empty_row(line))
 		return (1);
 	if (empty_row(line))

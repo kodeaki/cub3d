@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   touch.c                                            :+:      :+:    :+:   */
+/*   put_pixel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 16:42:24 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/04/01 15:34:11 by tpirinen         ###   ########.fr       */
+/*   Created: 2026/03/31 14:36:38 by tpirinen          #+#    #+#             */
+/*   Updated: 2026/06/28 10:55:49 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	touch(t_game *game, float px, float py)
+void	put_pixel(t_game *game, int color, int x, int y)
 {
-	int	x;
-	int	y;
+	int	index;
 
-	x = px / BLOCK_SIZE;
-	y = py / BLOCK_SIZE;
-	if (x < 0 || y < 0)
-		return (true);
-	if (x >= game->map.width || y >= game->map.height)
-		return (true);
-	if (game->map.arr[y][x] == '1'
-		|| game->map.arr[y][x] == ' ')
-		return (true);
-	return (false);
+	if (x >= game->window_width || y >= game->window_height || x < 0 || y < 0)
+		return ;
+	index = y * game->size_line + x * game->bits_per_pixel / 8;
+	game->data[index] = color & 0xFF;
+	game->data[index + 1] = (color >> 8) & 0xFF;
+	game->data[index + 2] = (color >> 16) & 0xFF;
 }

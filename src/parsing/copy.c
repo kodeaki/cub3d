@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	copy_file(char **argv, t_game *game)
+void	copy_file(char **argv, t_game *game)
 {
 	int	fd;
 	int	map_size;
@@ -20,13 +20,19 @@ int	copy_file(char **argv, t_game *game)
 	map_size = game->file.line_count - game->file.map_start;
 	fd = open(argv[1], O_RDONLY, 0);
 	if (fd < 0)
-		return (1);
+		ft_exit(game, ERR_FILE_OPEN);
 	game->file.raw_map = ft_calloc(map_size + 1, sizeof(char *));
 	if (!game->file.raw_map)
-		return (ft_close(fd, 1));
+	{
+		close(fd);
+		ft_exit(game, ERR_MEMORY_ALLOC);
+	}
 	if (get_elements(fd, game))
-		return (ft_close(fd, 1));
-	return (ft_close(fd, 0));
+	{
+		close(fd);
+		ft_exit(game, ERR_FILE_ELEMENTS);
+	}
+	close(fd);
 }
 
 int	get_elements(int fd, t_game *game)
@@ -41,10 +47,10 @@ int	get_elements(int fd, t_game *game)
 	while (line && i < game->file.map_start)
 	{
 		if (loading(fd, &i, &line, game))
-			return (ft_free(game), 1);
+			return (1);
 	}
 	if (loading_map(fd, &line, game))
-		return (ft_free(game), 1);
+		return (1);
 	if (line)
 		free(line);
 	return (0);

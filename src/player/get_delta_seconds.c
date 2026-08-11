@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_player.c                                      :+:      :+:    :+:   */
+/*   get_delta_seconds.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 14:36:38 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/04/01 15:38:37 by tpirinen         ###   ########.fr       */
+/*   Created: 2026/03/31 14:54:20 by tpirinen          #+#    #+#             */
+/*   Updated: 2026/06/28 10:56:13 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_player(t_game *game, int size, int color)
+double	get_delta_seconds(void)
 {
-	int	x;
-	int	y;
-	int	i;
-	int	j;
+	static struct timeval	last = {0, 0};
+	struct timeval			now;
+	double					dt;
 
-	x = (int)(game->player.pos.x * game->minimap.cell);
-	y = (int)(game->player.pos.y * game->minimap.cell);
-	i = x - size;
-	while (i <= x + size)
-	{
-		j = y - size;
-		while (j <= y + size)
-		{
-			put_pixel(game, color, i, j);
-			j++;
-		}
-		i++;
-	}
+	if (gettimeofday(&now, NULL) != 0)
+		return (0.016);
+	if (last.tv_sec == 0 && last.tv_usec == 0)
+		dt = 0.016;
+	else
+		dt = (now.tv_sec - last.tv_sec) + (now.tv_usec - last.tv_usec) / 1e6;
+	if (dt < 0.0)
+		dt = 0.0;
+	if (dt > 0.1)
+		dt = 0.1;
+	last = now;
+	return (dt);
 }

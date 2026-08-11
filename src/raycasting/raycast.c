@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/17 12:14:39 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/06/05 20:26:50 by jtarvain         ###   ########.fr       */
+/*   Created: 2026/06/08 23:39:23 by jtarvain          #+#    #+#             */
+/*   Updated: 2026/06/28 10:55:30 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	parsing(int argc, char **argv, t_game *game)
+void	raycast(t_game *game)
 {
-	open_file(argc, argv, game);
-	set_height(game);
-	copy_file(argv, game);
-	parse_map(game);
+	uint32_t	*data;
+	int			col;
+
+	data = (uint32_t *)game->data;
+	col = 0;
+	while (col < game->window_width - 1)
+	{
+		ray_init(game, col);
+		ray_dda(game);
+		texture_setup(game);
+		draw_column(game, data, col);
+		col++;
+	}
 }

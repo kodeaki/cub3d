@@ -12,26 +12,30 @@
 
 #include "cub3d.h"
 
-int	flood_fill(t_game *game)
+void	flood_fill(t_game *game)
 {
 	int	y;
 	int	x;
 
 	y = game->file.parser.player_y;
 	x = game->file.parser.player_x;
-	if (allocate_visited(game))
-		return (1);
+	allocate_visited(game);
 	fill(game, game->map.visited, y, x);
 	if (compare(game, game->map.arr, game->map.visited))
-		return (free_mapc(game->map.visited, game->map.height), 1);
+	{
+		free_mapc(game->map.visited, game->map.height);
+		ft_exit(game, ERR_MAP_NOT_ENCLOSED);
+	}
 	free_mapc(game->map.visited, game->map.height);
-	return (0);
 }
 
 void	fill(t_game *game, int **visited, int y, int x)
 {
 	if (y < 0 || y >= game->map.height || x < 0 || x >= game->map.width)
+	{
+		game->file.parser.out_of_bounds = true;
 		return ;
+	}
 	if (game->map.arr[y][x] == '1')
 		return ;
 	if (visited[y][x] == 1)
@@ -54,6 +58,8 @@ int	compare(t_game *game, char **map, int **visited)
 	int	j;
 
 	i = 0;
+	if (game->file.parser.out_of_bounds == true)
+		return (1);
 	while (i < game->map.height)
 	{
 		j = 0;
@@ -67,4 +73,25 @@ int	compare(t_game *game, char **map, int **visited)
 		i++;
 	}
 	return (0);
+}
+
+void	allocate_visited(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	game->map.visited = malloc(sizeof(int *) * (game->map.height + 1));
+	if (!game->map.visited)
+		ft_exit(game, ERR_MEMORY_ALLOC);
+	game->map.visited[game->map.height] = NULL;
+	while (i < game->map.height)
+	{
+		game->map.visited[i] = ft_calloc(game->map.width, sizeof(int));
+		if (!game->map.visited[i])
+		{
+			free_mapc(game->map.visited, i);
+			ft_exit(game, ERR_MEMORY_ALLOC);
+		}
+		i++;
+	}
 }

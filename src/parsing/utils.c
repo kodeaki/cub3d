@@ -12,26 +12,21 @@
 
 #include "cub3d.h"
 
-int	set_height(t_game *game)
+void	set_height(t_game *game)
 {
 	int	height;
 
 	height = game->file.line_count - game->file.map_start;
 	if (height < 3)
-		return (1);
+		ft_exit(game, ERR_FILE_INVALID_MAP);
 	game->map.height = height;
-	return (0);
 }
 
-void	ft_exit(int err, const char *msg)
+void	ft_exit(t_game *game, const char *msg)
 {
-	printf("Error.\n");
+	if (game)
+		ft_free(game);
+	printf("Error\n");
 	printf("%s\n", msg);
-	exit(err);
-}
-
-int	ft_close(int fd, int ret)
-{
-	close(fd);
-	return (ret);
+	exit(EXIT_FAILURE);
 }

@@ -6,14 +6,14 @@
 /*   By: jtarvain <jtarvain@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 01:40:54 by jtarvain          #+#    #+#             */
-/*   Updated: 2026/05/06 23:19:47 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/06/26 13:41:59 by jtarvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		validate_format(char *line, t_game *game);
-static int		check_rgb_len(t_game *game);
+static size_t	count_digits(char *line, size_t *i);
+static int		validate_format(char *line, t_game *game, size_t start);
 static uint32_t	convert_rgb_to_hex(t_rgb *rgb);
 
 int	set_floor(char *line, t_game *game)
@@ -22,10 +22,10 @@ int	set_floor(char *line, t_game *game)
 
 	if (!check_line(line, 1))
 		return (1);
-	if (validate_format(line, game))
-		return (1);
 	pos = 2;
-	if (check_rgb_len(game))
+	while (line[pos] && ft_space(line[pos]) && line[pos] != '\n')
+		pos++;
+	if (validate_format(line, game, pos))
 		return (1);
 	if (set_color(&line[pos], &game->file.parser.f.r, game->file.parser.r_len))
 		return (1);
@@ -45,10 +45,10 @@ int	set_ceiling(char *line, t_game *game)
 
 	if (!check_line(line, 1))
 		return (1);
-	if (validate_format(line, game))
-		return (1);
 	pos = 2;
-	if (check_rgb_len(game))
+	while (line[pos] && ft_space(line[pos]) && line[pos] != '\n')
+		pos++;
+	if (validate_format(line, game, pos))
 		return (1);
 	if (set_color(&line[pos], &game->file.parser.c.r, game->file.parser.r_len))
 		return (1);
@@ -62,38 +62,32 @@ int	set_ceiling(char *line, t_game *game)
 	return (0);
 }
 
-static int	validate_format(char *line, t_game *game)
+static size_t	count_digits(char *line, size_t *i)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	size_t	count;
 
-	i = 2;
-	while ((line[i] && ft_isdigit(line[i])) && i < 5)
-		i++;
-	if (line[i++] != ',')
-		return (1);
-	j = 0;
-	while ((line[i + j] && ft_isdigit(line[i + j])) && j < 3)
-		j++;
-	if (line[i + j++] != ',')
-		return (1);
-	k = 0;
-	while ((line[i + j + k] && ft_isdigit(line[i + j + k])) && k < 3)
-		k++;
-	game->file.parser.r_len = i - 3;
-	game->file.parser.g_len = j - 1;
-	game->file.parser.b_len = k;
-	return (0);
+	count = 0;
+	while (line[*i] && ft_isdigit(line[*i]) && count < 3)
+	{
+		(*i)++;
+		count++;
+	}
+	return (count);
 }
 
-static int	check_rgb_len(t_game *game)
+static int	validate_format(char *line, t_game *game, size_t start)
 {
-	if (!game->file.parser.r_len || !game->file.parser.g_len
-		|| !game->file.parser.b_len)
+	size_t	i;
+
+	i = start;
+	game->file.parser.r_len = count_digits(line, &i);
+	if (!game->file.parser.r_len || line[i++] != ',')
 		return (1);
-	if (game->file.parser.r_len > 3 || game->file.parser.g_len > 3
-		|| game->file.parser.b_len > 3)
+	game->file.parser.g_len = count_digits(line, &i);
+	if (!game->file.parser.g_len || line[i++] != ',')
+		return (1);
+	game->file.parser.b_len = count_digits(line, &i);
+	if (!game->file.parser.b_len || no_trailing_content(&line[i]))
 		return (1);
 	return (0);
 }

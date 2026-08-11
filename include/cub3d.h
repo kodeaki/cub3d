@@ -6,34 +6,25 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:05:54 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/05/09 18:19:25 by jtarvain         ###   ########.fr       */
+/*   Updated: 2026/06/28 10:58:28 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define BLOCK_SIZE 64
-# define VERTICAL 0
-# define HORIZONTAL 1
+// Change players field of view. 1° < FOV_DEG < 180°
+# define FOV_DEG 70
 
-# define W      119
-# define A      97
-# define S      115
-# define D      100
-# define LEFT   65361
-# define RIGHT  65363
-# define ESC    65307
+// Change players movement speed and turn speed
+//  1 - - - - 3 - - - - - 5 - - - - - 10 - - - - - - - 50
+// slow - - fast - - super fast - ultra fast - - uncontrollable
+# define MOVE_SPEED 3
+# define TURN_SPEED 3
 
-# define PI 3.14159265359
-
-enum e_orientation
-{
-	NO,
-	SO,
-	EA,
-	WE,
-};
+// Window size fractions scaling the window size to the screen size 0.1 - 1.0
+# define WINDOW_WIDTH_FRACTION 0.9
+# define WINDOW_HEIGHT_FRACTION 0.9
 
 # include "minilibx-linux/mlx.h"
 # include "libft.h"
@@ -43,84 +34,108 @@ enum e_orientation
 # include <math.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <sys/time.h>
 
-// Parsing
-int		parsing(int argc, char **argv, t_game *game);
-int		open_file(int argc, char **argv, t_game *game);
-int		copy_file(char **argv, t_game *game);
-int		check_extension(char *file);
-int		parse_file(int fd, t_game *game);
-int		process_line(t_game *game, char *line, int i);
-int		ft_strset(const char *str, const char *set);
-int		ft_close(int fd, int ret);
-int		add_check(t_game *game, char *line);
-int		ft_check(t_game *game);
-int		empty_row(char *line);
-int		get_elements(int fd, t_game *game);
-int		loading(int fd, volatile int *i, char **line, t_game *game);
-int		load_line(char *line, t_game *game);
-int		loading_map(int fd, char **line, t_game *game);
-int		set_height(t_game *game);
-void	ft_free(t_game *game);
-void	ft_exit(int err, const char *msg);
-int		allocate_no(char *line, t_game *game);
-int		allocate_so(char *line, t_game *game);
-int		allocate_ea(char *line, t_game *game);
-int		allocate_we(char *line, t_game *game);
-int		set_floor(char *line, t_game *game);
-int		set_ceiling(char *line, t_game *game);
-size_t	check_line(char *line, int mod);
-int		ft_space(char c);
-void	free_map(char **map);
-int		set_color(char *line, int *color, size_t len);
-int		safe_atoi(const char *str, int *err);
-int		parse_map(t_game *game);
-int		find_width(t_game *game);
-void	print_parser(t_game *game);
-int		scan_map(t_game *game);
-int		row_width(t_game *game, const char *row, const int y);
-int		copy_map(t_game *game);
-void	free_mapc(void **map, int i);
-int		copy_row(t_game *game, int row);
-void	print_map(char **map);
-int		flood_fill(t_game *game);
-void	fill(t_game *game, int **visited, int y, int x);
-int		compare(t_game *game, char **map, int **visited);
-int		allocate_visited(t_game *game);
-int		free_mlx(t_game *game);
+// keycodes used by mlx
+# define W      119
+# define A      97
+# define S      115
+# define D      100
+# define LEFT   65361
+# define RIGHT  65363
+# define ESC    65307
 
-// Initialization
-void	game_init(t_game *game);
+// Error messages
+# define ERR_ARGC "Invalid number of arguments"
+# define ERR_FILE_NAME_EMPTY "Invalid filename: empty"
+# define ERR_FILE_NAME_EXTENSION "Invalid filename: must end with .cub"
+# define ERR_FILE_OPEN "Failed to open file"
+# define ERR_FILE_EMPTY "Map file is empty"
+# define ERR_FILE_INVALID_LINE "Invalid line in map file"
+# define ERR_FILE_INVALID_MAP "Invalid map: not enough rows"
+# define ERR_MEMORY_ALLOC "Memory allocation failed"
+# define ERR_FILE_ELEMENTS "Failed to parse file elements"
+# define ERR_NARROW_MAP "Map is too narrow"
+# define ERR_PLAYER_COUNT "Invalid player count"
+# define ERR_MAP_NOT_ENCLOSED "Map is not enclosed"
 
-// Parsing / Map
-void	create_map(t_game *game);
 
-// Key presses
-int		key_press(int keycode, t_game *game);
-int		key_release(int keycode, t_game *game);
+// --- Parsing ---
+void		parsing(int argc, char **argv, t_game *game);
+void		open_file(int argc, char **argv, t_game *game);
+void		copy_file(char **argv, t_game *game);
+int			check_extension(char *file);
+int			parse_file(int fd, t_game *game);
+int			process_line(t_game *game, char *line, int i);
+int			ft_strset(const char *str, const char *set);
+int			add_check(t_game *game, char *line);
+int			ft_check(t_game *game);
+int			empty_row(char *line);
+int			get_elements(int fd, t_game *game);
+int			loading(int fd, volatile int *i, char **line, t_game *game);
+int			load_line(char *line, t_game *game);
+int			loading_map(int fd, char **line, t_game *game);
+void		set_height(t_game *game);
 
-// Drawing / Image output
-void	put_pixel(t_game *game, int color, int x, int y);
-void	draw_minimap(t_game *game);
-void	draw_player(t_game *game, int size, int color);
-void	draw_rays(t_player *player, t_game *game);
-void	draw_map(t_game *game);
-void	clear_image(t_game *game);
-int		game_loop(t_game *game);
-	
-// Raycasting
-float	distance(float x, float y);
-float	fixed_dist(t_ray *ray, float player_angle);
-// void	raycast(t_game *game, t_player *player);
-void	raycast_texture(t_game *game);
-int		get_texture_color(t_game *game, int current_y,
-				int wall_top, float height);
-int		get_texture_x(t_game *game, int orientation);
-int		get_texture_y(int current_y, int wall_top, float height);
-bool	touch(t_game *game, float px, float py);
+int			allocate_no(char *line, t_game *game);
+int			allocate_so(char *line, t_game *game);
+int			allocate_ea(char *line, t_game *game);
+int			allocate_we(char *line, t_game *game);
 
-// Player
-bool	player_collision(t_game *game, float x, float y);
-void	move_player(t_player *player, t_game *game);
+int			set_floor(char *line, t_game *game);
+int			set_ceiling(char *line, t_game *game);
+
+size_t		check_line(char *line, int mod);
+int			ft_space(char c);
+int			set_color(char *line, int *color, size_t len);
+int			safe_atoi(const char *str, int *err);
+void		parse_map(t_game *game);
+int			find_width(t_game *game);
+void		print_parser(t_game *game);
+void		scan_map(t_game *game);
+int			row_width(t_game *game, const char *row, const int y);
+void		copy_map(t_game *game);
+void		copy_row(t_game *game, int row);
+
+void		flood_fill(t_game *game);
+void		fill(t_game *game, int **visited, int y, int x);
+int			compare(t_game *game, char **map, int **visited);
+void		allocate_visited(t_game *game);
+int			no_trailing_content(char *str);
+
+// --- Initialization & Cleanup ---
+void		game_init(t_game *game);
+void		ft_free(t_game *game);
+void		ft_exit(t_game *game, const char *msg);
+int			free_mlx(t_game *game);
+void		free_map(char **map);
+void		free_mapc(void **map, int i);
+
+// --- Key presses ---
+int			key_press(int keycode, t_game *game);
+int			key_release(int keycode, t_game *game);
+
+// --- Player ---
+void		move_player(t_player *player, t_game *game);
+bool		player_collision(t_game *game, double x, double y);
+double		get_delta_seconds(void);
+
+// --- Raycasting ---
+void		raycast(t_game *game);
+void		ray_init(t_game *game, int col);
+void		ray_dda(t_game *game);
+void		texture_setup(t_game *game);
+t_texture	*get_wall_texture(t_game *game);
+void		draw_column(t_game *game, uint32_t *data, int col);
+
+// --- Drawing / Image output ---
+bool		touch(t_game *game, double px, double py);
+void		put_pixel(t_game *game, int color, int x, int y);
+void		clear_image(t_game *game);
+void		draw_minimap(t_game *game);
+void		draw_player(t_game *game, int size, int color);
+void		draw_rays(t_player *player, t_game *game);
+void		draw_map(t_game *game);
+int			game_loop(t_game *game);
 
 #endif

@@ -12,74 +12,91 @@
 
 #include "cub3d.h"
 
-bool	player_collision(t_game *game, float x, float y)
+bool	player_collision(t_game *game, double x, double y)
 {
 	return (touch(game, x, y));
 }
 
-static void	rotate_player(t_player *player)
+static void	rotate_player(t_player *player, double dt)
 {
+	double	rotation;
+	double	cos_a;
+	double	sin_a;
+	double	old_dir_x;
+	double	old_plane_x;
+
+	if (player->left_rotate == player->right_rotate)
+		return ;
+	rotation = player->turn_speed * dt;
 	if (player->left_rotate)
-		player->angle -= player->turn_speed;
-	if (player->right_rotate)
-		player->angle += player->turn_speed;
-	if (player->angle > 2 * PI)
-		player->angle = 0;
-	if (player->angle < 0)
-		player->angle = 2 * PI;
-	player->cos_angle = cos(player->angle);
-	player->sin_angle = sin(player->angle);
+		rotation = -rotation;
+	cos_a = cos(rotation);
+	sin_a = sin(rotation);
+	old_dir_x = player->dir.x;
+	player->dir.x = player->dir.x * cos_a - player->dir.y * sin_a;
+	player->dir.y = old_dir_x * sin_a + player->dir.y * cos_a;
+	old_plane_x = player->plane.x;
+	player->plane.x = player->plane.x * cos_a - player->plane.y * sin_a;
+	player->plane.y = old_plane_x * sin_a + player->plane.y * cos_a;
 }
 
 static void	calculate_movement(t_player *player)
 {
+	double	perp_x;
+	double	perp_y;
+
+	perp_x = player->dir.y;
+	perp_y = -player->dir.x;
 	if (player->key_up)
 	{
-		player->move_x += player->cos_angle;
-		player->move_y += player->sin_angle;
+		player->move_x += player->dir.x;
+		player->move_y += player->dir.y;
 	}
 	if (player->key_down)
 	{
-		player->move_x -= player->cos_angle;
-		player->move_y -= player->sin_angle;
+		player->move_x -= player->dir.x;
+		player->move_y -= player->dir.y;
 	}
 	if (player->key_left)
 	{
-		player->move_x += player->sin_angle;
-		player->move_y -= player->cos_angle;
+		player->move_x += perp_x;
+		player->move_y += perp_y;
 	}
 	if (player->key_right)
 	{
-		player->move_x -= player->sin_angle;
-		player->move_y += player->cos_angle;
+		player->move_x -= perp_x;
+		player->move_y -= perp_y;
 	}
 }
 
-static void	apply_movement(t_player *player, t_game *game)
+static void	apply_movement(t_player *player, t_game *game, double dt)
 {
-	float	move_len;
-	float	new_x;
-	float	new_y;
+	double	move_len;
+	double	new_x;
+	double	new_y;
 
-	move_len = sqrtf(player->move_x * player->move_x
+	move_len = sqrt(player->move_x * player->move_x
 			+ player->move_y * player->move_y);
-	if (move_len <= 0.0f)
+	if (move_len <= 0.0)
 		return ;
 	player->move_x /= move_len;
 	player->move_y /= move_len;
-	new_x = player->x + player->move_x * player->move_speed;
-	new_y = player->y + player->move_y * player->move_speed;
-	if (!player_collision(game, new_x, player->y))
-		player->x = new_x;
-	if (!player_collision(game, player->x, new_y))
-		player->y = new_y;
+	new_x = player->pos.x + player->move_x * player->move_speed * dt;
+	new_y = player->pos.y + player->move_y * player->move_speed * dt;
+	if (!player_collision(game, new_x, player->pos.y))
+		player->pos.x = new_x;
+	if (!player_collision(game, player->pos.x, new_y))
+		player->pos.y = new_y;
 }
 
 void	move_player(t_player *player, t_game *game)
 {
-	player->move_x = 0.0f;
-	player->move_y = 0.0f;
-	rotate_player(player);
+	double	dt;
+
+	player->move_x = 0.0;
+	player->move_y = 0.0;
+	dt = get_delta_seconds();
+	rotate_player(player, dt);
 	calculate_movement(player);
-	apply_movement(player, game);
+	apply_movement(player, game, dt);
 }

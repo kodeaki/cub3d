@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pixel.c                                        :+:      :+:    :+:   */
+/*   get_wall_texture.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 14:36:38 by tpirinen          #+#    #+#             */
-/*   Updated: 2026/03/31 14:37:34 by tpirinen         ###   ########.fr       */
+/*   Created: 2026/06/24 15:27:36 by tpirinen          #+#    #+#             */
+/*   Updated: 2026/06/28 10:55:39 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_pixel(t_game *game, int color, int x, int y)
+t_texture	*get_wall_texture(t_game *game)
 {
-	int	index;
-
-	if (x >= game->window_width || y >= game->window_height || x < 0 || y < 0)
-		return ;
-	index = y * game->size_line + x * game->bits_per_pixel / 8;
-	game->data[index] = color & 0xFF;
-	game->data[index + 1] = (color >> 8) & 0xFF;
-	game->data[index + 2] = (color >> 16) & 0xFF;
+	if (game->ray.side == X_SIDE)
+	{
+		if (game->ray.step_x == 1)
+			return (&game->config.east);
+		else
+			return (&game->config.west);
+	}
+	else
+	{
+		if (game->ray.step_y == 1)
+			return (&game->config.south);
+		else
+			return (&game->config.north);
+	}
 }
